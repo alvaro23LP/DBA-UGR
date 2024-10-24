@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package practica2;
 import jade.core.Agent;
 import static java.lang.System.exit;
@@ -15,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Fernando
+ * @author alvaro2311
  */
 public class P2 extends Agent{
 
