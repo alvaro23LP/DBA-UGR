@@ -14,46 +14,30 @@ import java.util.ArrayList;
  *
  * @author alvaro2311
  */
-public class P2 extends Agent{
-
-    Mapa mapa;
-    Entorno entorno;
-    public ArrayList<ArrayList<Integer>> caminoRecorrido;
-   
-    
-    protected void setup() {
-        // Inicializamos el agente
+public class P2 {
+    public static void main(String[] args){
+        
+        Mapa mapa;
+        Entorno entorno;
+        
+        //////////////// ENTORNO /////////////////
         mapa = new Mapa();
-        //String ruta = "./Pr1-maps/mapWithDiagonalWall.txt";
-        String ruta = "./mapas/mapWithComplexObstacle1.txt";
-        //String ruta = "./Pr1-maps/mapWithComplexObstacle2.txt";
-        
-        caminoRecorrido = new ArrayList<ArrayList<Integer>>();
-        
-        //Leemos el mapa
+        //String ruta = "./mapas/mapWithDiagonalWall.txt";
+        //String ruta = "./mapas/mapWithComplexObstacle1.txt";
+        String ruta = "./mapas/mapWithComplexObstacle2.txt";
+
         mapa.leermapa(ruta);
         
-        //Inicializamos el entorno del Agente
         //entorno = new Entorno(mapa, 3, 9, 9, 9);
         entorno = new Entorno(mapa, 0, 6, 9, 6);
         //entorno = new Entorno(mapa, 0, 6, 9, 6);
         entorno.mostrarEnTorno();
-        
-        
-        addBehaviour(new MejorMovimientoBehaviour(entorno, this));
-        addBehaviour(new MovimientoBehaviour(entorno, this));
-    }
-    
-    public void takeDown() {
-        System.out.println("El agente ha resuelto el mapa en " + caminoRecorrido.size() + " pasos");
-    }
-    
-    public static void main(String[] args){
-        
-        //Ejecutamos
+
+
+        //////////////// AGENTE ///////////////
         String host = "localhost";
-        String containerName = "container-3";
-        String agentName = "ignaciotd";
+        String containerName = "container-P2";
+        String agentName = "alvarolv";
         
         try {
         jade.core.Runtime rt = jade.core.Runtime.instance();
@@ -66,8 +50,9 @@ public class P2 extends Agent{
         
         ContainerController cc = rt.createAgentContainer(p);
         
-        //Creamos un nuevo agente y ejecutamos
-        AgentController ac = cc.createNewAgent(agentName, P2.class.getCanonicalName(), null);
+        // Creamos un nuevo agente y le pasamos el entorno como argumento
+        Object[] agentArgs = new Object[] { entorno };
+        AgentController ac = cc.createNewAgent(agentName, Agente.class.getCanonicalName(), agentArgs);
         
         ac.start();        
         

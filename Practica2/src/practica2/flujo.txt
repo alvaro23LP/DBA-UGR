@@ -1,0 +1,42 @@
+main:
+
+iniciamos entorno (con mapa dentro privado)
+creamos agente y le pasamos el entorno
+
+
+agente:
+
+MejorMovimientoBehaviour: que se encarga de devolver la posicion a la que se va a mover 
+MovimientoBehaviour: Actualiza el movimiento y lo muestra por pantalla
+
+
+MejorMovimientoBehaviour: ()
+Le pregunta al entorno por las casillas colindantes y este le devuelve si hay pared o no en cada una 
+El comportamiento evalua para cada movimiento posible la propia heuristica del movimiento llamando a getUtility(teniendo en cuenta la meta, la pared...)
+Se guarda un array con los valores de cada getUtility de cada movimiento, el que mejor heuristica tenga tendrá valor mas bajo (esto irá en funcion de la menor distancia y de si ya ha pasado previamente, en cuyo caso equivale a aumentar un poco la distancia) 
+El movimiento elegido se añadira a caminoRecorrido
+
+MovimientoBehaviour: 
+se encarga de actualizar la memoria del agente de los sitos por los que ha pasado
+actuliza la posicion del agente en el entorno.
+
+esto se realiza iterativamente hasta que llega a la meta.
+
+
+
+
+
+INTERFAZ MOVIMIENTO:
+
+getUtility(): cada uno de los movimientos particulares devuelve la distancia con su propia implementacion
+
+
+
+
+
+
+
+
+
+
+

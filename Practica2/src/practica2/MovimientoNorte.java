@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class MovimientoNorte implements Movimiento {
     
     private Entorno entorno;
-    private P2 agente;
+    private Agente agente;
     
-    public MovimientoNorte (Entorno entorno, P2 agente){
+    public MovimientoNorte (Entorno entorno, Agente agente){
         this.entorno = entorno;
         this.agente = agente;
     }
@@ -22,7 +22,7 @@ public class MovimientoNorte implements Movimiento {
         double distanciaNorte = -1;
         
         if (entorno.movimientoPosible(entorno.filAgente-1,entorno.colAgente)) 
-            distanciaNorte = CalcularDistancia(entorno, entorno.filAgente-1,entorno.colAgente, agente.caminoRecorrido);
+            distanciaNorte = getUtility(entorno, entorno.filAgente-1,entorno.colAgente, agente.caminoRecorrido);
         
         return distanciaNorte;
     }

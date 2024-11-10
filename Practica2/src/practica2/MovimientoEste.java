@@ -8,9 +8,9 @@ package practica2;
 public class MovimientoEste implements Movimiento{
     
     private Entorno entorno;
-    private P2 agente;
+    private Agente agente;
     
-    public MovimientoEste (Entorno entorno, P2 agente){
+    public MovimientoEste (Entorno entorno, Agente agente){
         this.entorno = entorno;
         this.agente = agente;
     }
@@ -20,7 +20,7 @@ public class MovimientoEste implements Movimiento{
         double distanciaEste = -1;
         
         if (entorno.movimientoPosible(entorno.filAgente,entorno.colAgente+1))
-            distanciaEste = CalcularDistancia(entorno, entorno.filAgente,entorno.colAgente+1, agente.caminoRecorrido);
+            distanciaEste = getUtility(entorno, entorno.filAgente,entorno.colAgente+1, agente.caminoRecorrido);
         
         return distanciaEste;
     }

@@ -12,9 +12,9 @@ public class MovimientoBehaviour extends Behaviour {
     Entorno entorno;
     int filaMovimiento;
     int colMovimiento;
-    P2 agente;
+    Agente agente;
     
-    public MovimientoBehaviour(Entorno entornoAgente, P2 agente) {
+    public MovimientoBehaviour(Entorno entornoAgente, Agente agente) {
         entorno = entornoAgente;
         this.agente = agente;
     }
@@ -23,9 +23,10 @@ public class MovimientoBehaviour extends Behaviour {
         filaMovimiento = (!agente.caminoRecorrido.isEmpty()) ? agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1).get(0) : -1;
         colMovimiento = (!agente.caminoRecorrido.isEmpty()) ? agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1).get(1) : -1;
         
+        //Actualiza la posición del agente en el entorno
         if (entorno.movimientoPosible(filaMovimiento,colMovimiento)) {
-        entorno.filAgente = filaMovimiento;
-        entorno.colAgente = colMovimiento;
+            entorno.filAgente = filaMovimiento;
+            entorno.colAgente = colMovimiento;
         }
         
         entorno.mostrarEnTorno();      

@@ -13,8 +13,8 @@ public interface Movimiento {
     public int getFila();
     
     public int getColumna();
-    
-    default double CalcularDistancia(Entorno entorno, int fila, int columna, ArrayList<ArrayList<Integer>> caminoRecorrido) {
+       
+    default double getUtility(Entorno entorno, int fila, int columna, ArrayList<ArrayList<Integer>> caminoRecorrido) {
         int distancia_y = Math.abs(entorno.filMeta - fila);
         int distancia_x = Math.abs(entorno.colMeta - columna);
         double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
@@ -31,4 +31,6 @@ public interface Movimiento {
             
         return (distancia + castigo);
     }
+        
+    //public double see();
 }

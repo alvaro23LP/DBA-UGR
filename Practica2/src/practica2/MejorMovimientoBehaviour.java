@@ -15,7 +15,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
     Entorno entorno;
     double mejorDistancia = 99999999;
     int filaMovimiento, colMovimiento;
-    P2 miAgente;
+    Agente miAgente;
     
     MovimientoNorte movNorte;
     MovimientoSur movSur;
@@ -26,7 +26,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
     MovimientoSureste movSureste;
     MovimientoSuroeste movSuroeste;
     
-    public MejorMovimientoBehaviour(Entorno entornoAgente, P2 agente) {
+    public MejorMovimientoBehaviour(Entorno entornoAgente, Agente agente) {
         entorno = entornoAgente;
         miAgente = agente;
         movNorte = new MovimientoNorte(entornoAgente, agente);
