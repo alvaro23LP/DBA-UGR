@@ -1,5 +1,7 @@
 package practica2;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alvaro2311
@@ -40,8 +42,96 @@ public class Entorno {
             System.out.println();
         }
     }
-    
+
+    // Función para devolver el sensor norte del agente
+    public int sensorNorteAgente(int x, int y) {
+        if (x > 0) {
+            return mapa.mapa[x-1][y];
+        } else {
+            return -1; 
+        }
+    }
+
+    // Función para devolver el sensor noreste del agente
+    public int sensorNoresteAgente(int x, int y) {
+        if (y < mapa.mapa.length - 1 && x > 0) {
+            return mapa.mapa[x-1][y+1];
+        } else {
+            return -1; 
+        }
+    }
+
+    // Función para devolver el sensor este del agente
+    public int sensorEsteAgente(int x, int y) {
+        if (y < mapa.mapa.length - 1) {
+            return mapa.mapa[x][y+1];
+        } else {
+            return -1; 
+        }
+    }
+
+    // Función para devolver el sensor sureste del agente
+    public int sensorSuresteAgente(int x, int y) {
+        if (x < mapa.mapa.length - 1 && y < mapa.mapa[0].length - 1) {
+            return mapa.mapa[x+1][y+1];
+        } else {
+            return -1;
+        }
+    }
+
+    // Función para devolver el sensor sur del agente
+    public int sensorSurAgente(int x, int y) {
+        if (x < mapa.mapa[0].length - 1) {
+            return mapa.mapa[x+1][y];
+        } else {
+            return -1; 
+        }
+    }
+
+    // Función para devolver el sensor suroeste del agente
+    public int sensorSuroesteAgente(int x, int y) {
+        if (y > 0 && x < mapa.mapa[0].length - 1) {
+            return mapa.mapa[x+1][y-1];
+        } else {
+            return -1; 
+        }
+    }
+
+    // Función para devolver el sensor oeste del agente
+    public int sensorOesteAgente(int x, int y) {
+        if (y > 0) {
+            return mapa.mapa[x][y-1];
+        } else {
+            return -1; 
+        }
+    }
+
+    // Función para devolver el sensor noroeste del agente
+    public int sensorNoroesteAgente(int x, int y) {
+        if (x > 0 && y > 0) {
+            return mapa.mapa[x-1][y-1];
+        } else {
+            return -1;
+        }
+    }
+
+
     public boolean movimientoPosible(int filaMovimiento, int columnaMovimiento) {
+        boolean posible = false;
+    
+        if (0 > filaMovimiento || filaMovimiento >= mapa.filas)
+            posible = false;
+        else if (0 > columnaMovimiento || columnaMovimiento >= mapa.columnas)
+            posible = false;
+        else if (mapa.mapa[filaMovimiento][columnaMovimiento] == 0)
+            posible = true;
+        else if (mapa.mapa[filaMovimiento][columnaMovimiento] == -1)
+            posible = false;
+    
+        return posible;
+    }
+
+    /* public boolean movimientoPosible(int filaMovimiento, int columnaMovimiento) {
         boolean posible = false;
         
         if (0 > filaMovimiento || filaMovimiento >= mapa.filas)
@@ -61,6 +151,18 @@ public class Entorno {
         //Como es un movimiento en diagonal hay que hacer más comprobaciones
         if (posible) {
             switch (direccion) {
+                case NORTE:
+                    // Add logic for NORTE if needed
+                    break;
+                case SUR:
+                    // Add logic for SUR if needed
+                    break;
+                case ESTE:
+                    // Add logic for ESTE if needed
+                    break;
+                case OESTE:
+                    // Add logic for OESTE if needed
+                    break;
                 case NORESTE:
                     posible = (mapa.mapa[filAgente-1][colAgente] == 0 && mapa.mapa[filAgente][colAgente+1] == 0);
                     break;
@@ -77,5 +179,5 @@ public class Entorno {
         }
         
         return posible;
-    }    
+    }     */
 }

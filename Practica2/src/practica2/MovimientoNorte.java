@@ -21,19 +21,20 @@ public class MovimientoNorte implements Movimiento {
     public double calculaMovimiento(){
         double distanciaNorte = -1;
         
-        if (entorno.movimientoPosible(entorno.filAgente-1,entorno.colAgente)) 
-            distanciaNorte = getUtility(entorno, entorno.filAgente-1,entorno.colAgente, agente.caminoRecorrido);
-        
+        // Dada la pos del agente, comprueba si puede moverse al norte
+        if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NORTE)) 
+            distanciaNorte = getUtility(entorno, agente.filAgente-1,agente.colAgente, agente.caminoRecorrido);
+
         return distanciaNorte;
     }
     
     @Override
     public int getFila(){
-        return entorno.filAgente-1;
+        return agente.filAgente-1;
     }
     
     @Override
     public int getColumna(){
-        return entorno.colAgente;
+        return agente.colAgente;
     }
 }

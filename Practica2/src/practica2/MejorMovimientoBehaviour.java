@@ -1,21 +1,15 @@
 package practica2;
 
-import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import java.lang.Thread;
 import java.util.ArrayList;
 
 
-/**
- *
- * @author alvaro2311
- */
-
 public class MejorMovimientoBehaviour extends Behaviour{
     Entorno entorno;
     double mejorDistancia = 99999999;
     int filaMovimiento, colMovimiento;
-    Agente miAgente;
+    Agente agente;
     
     MovimientoNorte movNorte;
     MovimientoSur movSur;
@@ -27,8 +21,8 @@ public class MejorMovimientoBehaviour extends Behaviour{
     MovimientoSuroeste movSuroeste;
     
     public MejorMovimientoBehaviour(Entorno entornoAgente, Agente agente) {
-        entorno = entornoAgente;
-        miAgente = agente;
+        this.entorno = entornoAgente;
+        this.agente = agente;
         movNorte = new MovimientoNorte(entornoAgente, agente);
         movSur = new MovimientoSur(entornoAgente, agente);
         movEste = new MovimientoEste(entornoAgente, agente);
@@ -134,12 +128,12 @@ public class MejorMovimientoBehaviour extends Behaviour{
        posicion.add(filaMovimiento);
        posicion.add(colMovimiento);
        
-       miAgente.caminoRecorrido.add(posicion);       
+       agente.caminoRecorrido.add(posicion);       
     }
     
     @Override
     public boolean done() {
-        if (entorno.filAgente == entorno.filMeta && entorno.colAgente == entorno.colMeta)
+        if (agente.filAgente == agente.filMeta && agente.colAgente == agente.colMeta)
             return true;
         else
             return false;

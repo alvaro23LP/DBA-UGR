@@ -5,7 +5,6 @@ package practica2;
  * @author alvaro2311
  */
 
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -22,28 +21,28 @@ public class Mapa {
         columnas = 0;
     }
     
-    public void leermapa(String ruta){
+    public void readMap(String ruta){
         
         try {
-            File archivo = new File(ruta);
-            FileReader fr = new FileReader(archivo);
+            File rutaArchivo = new File(ruta);
+            FileReader fr = new FileReader(rutaArchivo);
             BufferedReader br = new BufferedReader(fr);
 
             //Leemos las filas y columnas
-            filas = Integer.parseInt(br.readLine()); // Lee la primera línea como número de filas
-            columnas = Integer.parseInt(br.readLine()); // Lee la segunda línea como número de columnas
+            filas = Integer.parseInt(br.readLine()); 
+            columnas = Integer.parseInt(br.readLine()); 
             
             //Inicializamos el mapa
             mapa = new int[filas][columnas];
             
             for (int i = 0; i < filas; i++) {
-                String[] numerosEnLinea = br.readLine().split("\t"); // Lee la línea de números separados por tabulaciones
+                String[] filaNumeros = br.readLine().split("\t"); 
                 for (int j = 0; j < columnas; j++) {
-                    mapa[i][j] = Integer.parseInt(numerosEnLinea[j]); // Almacena los números en la matriz
+                    mapa[i][j] = Integer.parseInt(filaNumeros[j]); // Almacena los números en la matriz
                 }
             }
 
-            br.close(); // Cierra el BufferedReader
+            br.close(); 
 
         } catch (IOException e) {
             e.printStackTrace();

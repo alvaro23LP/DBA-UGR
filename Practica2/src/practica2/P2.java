@@ -1,14 +1,10 @@
 
 package practica2;
-import jade.core.Agent;
-import static java.lang.System.exit;
-import jade.core.Agent;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
-import java.util.ArrayList;
 
 /**
  *
@@ -26,7 +22,7 @@ public class P2 {
         //String ruta = "./mapas/mapWithComplexObstacle1.txt";
         String ruta = "./mapas/mapWithComplexObstacle2.txt";
 
-        mapa.leermapa(ruta);
+        mapa.readMap(ruta);
         
         //entorno = new Entorno(mapa, 3, 9, 9, 9);
         entorno = new Entorno(mapa, 0, 6, 9, 6);

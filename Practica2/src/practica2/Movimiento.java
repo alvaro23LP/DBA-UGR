@@ -31,6 +31,6 @@ public interface Movimiento {
             
         return (distancia + castigo);
     }
-        
-    //public double see();
+
+    //double getUtility() ;
 }

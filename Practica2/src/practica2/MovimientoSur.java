@@ -19,19 +19,30 @@ public class MovimientoSur implements Movimiento{
     public double calculaMovimiento(){
         double distanciaSur = -1;
         
+        // Dada la pos del agente, comprueba si puede moverse al sur
+        if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SUR)) 
+            distanciaSur = getUtility(entorno, agente.filAgente+1,agente.colAgente, agente.caminoRecorrido);
+        
+        return distanciaSur;
+    }
+
+/*     @Override
+    public double calculaMovimiento(){
+        double distanciaSur = -1;
+        
         if (entorno.movimientoPosible(entorno.filAgente+1,entorno.colAgente)) 
             distanciaSur = getUtility(entorno, entorno.filAgente+1,entorno.colAgente, agente.caminoRecorrido);
         
         return distanciaSur;
-    }
+    } */
     
     @Override
     public int getFila(){
-        return entorno.filAgente+1;
+        return agente.filAgente+1;
     }
     
     @Override
     public int getColumna(){
-        return entorno.colAgente;
+        return agente.colAgente;
     }
 }

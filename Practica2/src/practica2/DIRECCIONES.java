@@ -1,10 +1,5 @@
-
 package practica2;
 
-/**
- *
- * @author alvaro2311
- */
 public enum DIRECCIONES {
     NORTE,
     NORESTE,

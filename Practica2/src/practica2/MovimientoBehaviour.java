@@ -23,17 +23,19 @@ public class MovimientoBehaviour extends Behaviour {
         filaMovimiento = (!agente.caminoRecorrido.isEmpty()) ? agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1).get(0) : -1;
         colMovimiento = (!agente.caminoRecorrido.isEmpty()) ? agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1).get(1) : -1;
         
-        //Actualiza la posición del agente en el entorno
-        if (entorno.movimientoPosible(filaMovimiento,colMovimiento)) {
+        //Actualiza la posición del agente 
+        if (entorno.movimientoPosible(filaMovimiento, colMovimiento)) {
             entorno.filAgente = filaMovimiento;
             entorno.colAgente = colMovimiento;
+            agente.filAgente = filaMovimiento;
+            agente.colAgente = colMovimiento;
         }
         
         entorno.mostrarEnTorno();      
     }
     
     public boolean done() {
-        if (entorno.filAgente == entorno.filMeta && entorno.colAgente == entorno.colMeta) {
+        if (agente.filAgente == agente.filMeta && agente.colAgente == agente.colMeta) {
             agente.doDelete();
             return true;
         }

@@ -19,19 +19,20 @@ public class MovimientoSureste implements Movimiento{
     public double calculaMovimiento(){
         double distanciaSureste = -1;
         
-        if (entorno.movimientoPosibleDiagonal(entorno.filAgente+1,entorno.colAgente+1, DIRECCIONES.SURESTE)) 
-            distanciaSureste = getUtility(entorno, entorno.filAgente+1,entorno.colAgente+1, agente.caminoRecorrido);
+        // Dada la pos del agente, comprueba si puede moverse al sureste
+        if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SURESTE)) 
+            distanciaSureste = getUtility(entorno, agente.filAgente+1,agente.colAgente+1, agente.caminoRecorrido);
         
         return distanciaSureste;
     }
     
     @Override
     public int getFila(){
-        return entorno.filAgente+1;
+        return agente.filAgente+1;
     }
     
     @Override
     public int getColumna(){
-        return entorno.colAgente+1;
+        return agente.colAgente+1;
     }    
 }
