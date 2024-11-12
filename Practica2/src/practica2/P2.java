@@ -20,12 +20,12 @@ public class P2 {
         mapa = new Mapa();
         //String ruta = "./mapas/mapWithDiagonalWall.txt";
         //String ruta = "./mapas/mapWithComplexObstacle1.txt";
-        String ruta = "./mapas/mapWithComplexObstacle2.txt";
+        String ruta = "./mapas/mapWithHorizontalWall.txt";
 
         mapa.readMap(ruta);
         
         //entorno = new Entorno(mapa, 3, 9, 9, 9);
-        entorno = new Entorno(mapa, 0, 9, 9, 6);
+        entorno = new Entorno(mapa,0,0,9,9);
         //entorno = new Entorno(mapa, 0, 6, 9, 6);
         entorno.mostrarEnTorno();
 

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class MovimientoSuroeste implements Movimiento{
     
     private Agente agente;
+    public boolean siguiendoDiagonal = false;
     
     public MovimientoSuroeste (Agente agente){
         this.agente = agente;
@@ -22,7 +23,7 @@ public class MovimientoSuroeste implements Movimiento{
         // Dada la pos del agente, comprueba si puede moverse al suroeste
         if (agente.see(agente.filAgente,agente.colAgente, DIRECCIONES.SUROESTE)) 
             distanciaSuroeste = getUtility();
-            System.out.println("Distancia Suroeste: " + distanciaSuroeste);
+            //System.out.println("Distancia Suroeste: " + distanciaSuroeste);
             return distanciaSuroeste;
     }
     
@@ -46,12 +47,38 @@ public class MovimientoSuroeste implements Movimiento{
         posicion.add(agente.filAgente+1);
         posicion.add(agente.colAgente-1);
         
-        int castigo = 0;
-        int indicePos = agente.caminoRecorrido.lastIndexOf(posicion);
-        
-        if (indicePos != -1)
-            castigo = 99 - (agente.caminoRecorrido.size() - indicePos);
-            
-        return (distancia + castigo);
+        if ((agente.actualizarVistaAlrededor.get(0) == 0 || agente.actualizarVistaAlrededor.get(0) == -1) && agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(7) == -1 && agente.rodear2D != 2) {    
+            siguiendoDiagonal = true;
+            agente.rodear1D = 1;
+        }
+        else if ((agente.actualizarVistaAlrededor.get(4) == 0 || agente.actualizarVistaAlrededor.get(4) == -1) && agente.actualizarVistaAlrededor.get(3) == -1 && agente.actualizarVistaAlrededor.get(5) == -1 && agente.rodear1D != 1){
+            siguiendoDiagonal = true;
+            agente.rodear2D = 2;
+        }
+        else{
+            if (siguiendoDiagonal){
+                agente.dejarDeSeguirDiagonal = true;
+                siguiendoDiagonal = false;
+            }
+        }
+
+        if (siguiendoDiagonal)
+            distancia -= 50;
+
+
+        for (ArrayList<Integer> pos : agente.caminoRecorrido) {
+            if (pos.equals(posicion)) {
+                distancia += 5;
+            }
+        }
+
+        if (agente.noVolverAPasar != null)
+        for (ArrayList<Integer> pos : agente.noVolverAPasar) {
+            if (pos.equals(posicion)) {
+                distancia += 500;
+            }
+        }
+
+        return (distancia);
     }
 }

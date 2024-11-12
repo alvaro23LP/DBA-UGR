@@ -1,4 +1,5 @@
 package practica2;
+import java.util.ArrayList;
 
 /**
  *
@@ -39,6 +40,60 @@ public class Entorno {
             }
             System.out.println();
         }
+    }
+    
+    public ArrayList<Integer> actualizarEntornoAgente() {
+        ArrayList<Integer> entorno = new ArrayList<>();
+        
+        if (filAgente > 0 && colAgente > 0) {
+            entorno.add(mapa.mapa[filAgente-1][colAgente-1]);   //Noroeste
+        } else {
+            entorno.add(-1);
+        }
+
+        if (filAgente > 0) {
+            entorno.add(mapa.mapa[filAgente-1][colAgente]);     //Norte
+        } else {
+            entorno.add(-1);
+        }
+
+        if (filAgente > 0 && colAgente < mapa.mapa.length - 1) {
+            entorno.add(mapa.mapa[filAgente-1][colAgente+1]);   //Noreste
+        } else {
+            entorno.add(-1);
+        }
+
+        if (colAgente < mapa.mapa.length - 1) {
+            entorno.add(mapa.mapa[filAgente][colAgente+1]);     //Este
+        } else {
+            entorno.add(-1);
+        }
+
+        if (filAgente < mapa.mapa.length - 1 && colAgente < mapa.mapa[0].length - 1) {
+            entorno.add(mapa.mapa[filAgente+1][colAgente+1]);   //Sureste
+        } else {
+            entorno.add(-1);
+        }
+
+        if (filAgente < mapa.mapa[0].length - 1) {
+            entorno.add(mapa.mapa[filAgente+1][colAgente]);     //Sur
+        } else {
+            entorno.add(-1);
+        }
+
+        if (filAgente < mapa.mapa[0].length - 1 && colAgente > 0) {
+            entorno.add(mapa.mapa[filAgente+1][colAgente-1]);   //Suroeste
+        } else {
+            entorno.add(-1);
+        }
+
+        if (colAgente > 0) {
+            entorno.add(mapa.mapa[filAgente][colAgente-1]);     //Oeste
+        } else {
+            entorno.add(-1);
+        }
+
+        return entorno;
     }
 
     // Función para devolver el sensor norte del agente
