@@ -38,12 +38,12 @@ public class MovimientoNorte implements Movimiento {
     }
 
     public double getUtility() {
-        int distancia_y = Math.abs(agente.filMeta - agente.filAgente-1);
+        int distancia_y = Math.abs(agente.filMeta - (agente.filAgente-1));
         int distancia_x = Math.abs(agente.colMeta - agente.colAgente);
         double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
         
         ArrayList<Integer> posicion = new ArrayList<Integer>();
-        posicion.add(agente.filAgente);
+        posicion.add(agente.filAgente-1);
         posicion.add(agente.colAgente);
         
         int castigo = 0;
@@ -52,6 +52,6 @@ public class MovimientoNorte implements Movimiento {
         if (indicePos != -1)
             castigo = 99 - (agente.caminoRecorrido.size() - indicePos);
             
-        return (distancia );
+        return (distancia + castigo);
     }
 }

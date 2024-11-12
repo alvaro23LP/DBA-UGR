@@ -38,12 +38,12 @@ public class MovimientoEste implements Movimiento{
 
     public double getUtility() {
         int distancia_y = Math.abs(agente.filMeta - agente.filAgente);
-        int distancia_x = Math.abs(agente.colMeta - agente.colAgente+1);
+        int distancia_x = Math.abs(agente.colMeta - (agente.colAgente+1));
         double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
         
         ArrayList<Integer> posicion = new ArrayList<Integer>();
         posicion.add(agente.filAgente);
-        posicion.add(agente.colAgente);
+        posicion.add(agente.colAgente+1);
         
         int castigo = 0;
         int indicePos = agente.caminoRecorrido.lastIndexOf(posicion);
@@ -51,6 +51,6 @@ public class MovimientoEste implements Movimiento{
         if (indicePos != -1)
             castigo = 99 - (agente.caminoRecorrido.size() - indicePos);
             
-        return (distancia );
+        return (distancia + castigo );
     }
 }

@@ -25,7 +25,7 @@ public class P2 {
         mapa.readMap(ruta);
         
         //entorno = new Entorno(mapa, 3, 9, 9, 9);
-        entorno = new Entorno(mapa, 0, 6, 9, 6);
+        entorno = new Entorno(mapa, 0, 9, 9, 6);
         //entorno = new Entorno(mapa, 0, 6, 9, 6);
         entorno.mostrarEnTorno();
 
