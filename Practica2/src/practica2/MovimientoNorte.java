@@ -9,11 +9,9 @@ import java.util.ArrayList;
  */
 public class MovimientoNorte implements Movimiento {
     
-    private Entorno entorno;
     private Agente agente;
     
-    public MovimientoNorte (Entorno entorno, Agente agente){
-        this.entorno = entorno;
+    public MovimientoNorte (Agente agente){
         this.agente = agente;
     }
     
@@ -23,7 +21,8 @@ public class MovimientoNorte implements Movimiento {
         
         // Dada la pos del agente, comprueba si puede moverse al norte
         if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NORTE)) 
-            distanciaNorte = getUtility(entorno, agente.filAgente-1,agente.colAgente, agente.caminoRecorrido);
+            distanciaNorte = getUtility();
+            System.out.println("Distancia Norte: " + distanciaNorte);
 
         return distanciaNorte;
     }
@@ -36,5 +35,23 @@ public class MovimientoNorte implements Movimiento {
     @Override
     public int getColumna(){
         return agente.colAgente;
+    }
+
+    public double getUtility() {
+        int distancia_y = Math.abs(agente.filMeta - agente.filAgente-1);
+        int distancia_x = Math.abs(agente.colMeta - agente.colAgente);
+        double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
+        
+        ArrayList<Integer> posicion = new ArrayList<Integer>();
+        posicion.add(agente.filAgente);
+        posicion.add(agente.colAgente);
+        
+        int castigo = 0;
+        int indicePos = agente.caminoRecorrido.lastIndexOf(posicion);
+        
+        if (indicePos != -1)
+            castigo = 99 - (agente.caminoRecorrido.size() - indicePos);
+            
+        return (distancia );
     }
 }

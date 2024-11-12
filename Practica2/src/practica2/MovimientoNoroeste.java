@@ -1,5 +1,6 @@
 
 package practica2;
+import java.util.ArrayList;
 
 /**
  *
@@ -7,11 +8,9 @@ package practica2;
  */
 public class MovimientoNoroeste implements Movimiento{
     
-    private Entorno entorno;
     private Agente agente;
     
-    public MovimientoNoroeste (Entorno entorno, Agente agente){
-        this.entorno = entorno;
+    public MovimientoNoroeste (Agente agente){
         this.agente = agente;
     }
     
@@ -21,20 +20,10 @@ public class MovimientoNoroeste implements Movimiento{
         
         // Dada la pos del agente, comprueba si puede moverse al noroeste
         if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NOROESTE)) 
-            distanciaNoroeste = getUtility(entorno, agente.filAgente-1,agente.colAgente-1, agente.caminoRecorrido);
-        
+            distanciaNoroeste = getUtility();
+            System.out.println("Distancia Noroeste: " + distanciaNoroeste);
         return distanciaNoroeste;
     }
-
-/*     @Override
-    public double calculaMovimiento(){
-        double distanciaNoroeste = -1;
-        
-        if (entorno.movimientoPosibleDiagonal(entorno.filAgente-1,entorno.colAgente-1, DIRECCIONES.NOROESTE)) 
-            distanciaNoroeste = getUtility(entorno, entorno.filAgente-1,entorno.colAgente-1, agente.caminoRecorrido);
-        
-        return distanciaNoroeste;
-    } */
     
     @Override
     public int getFila(){
@@ -45,4 +34,22 @@ public class MovimientoNoroeste implements Movimiento{
     public int getColumna(){
         return agente.colAgente-1;
     }    
+
+    public double getUtility() {
+        int distancia_y = Math.abs(agente.filMeta - agente.filAgente-1);
+        int distancia_x = Math.abs(agente.colMeta - agente.colAgente-1);
+        double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
+        
+        ArrayList<Integer> posicion = new ArrayList<Integer>();
+        posicion.add(agente.filAgente);
+        posicion.add(agente.colAgente);
+        
+        int castigo = 0;
+        int indicePos = agente.caminoRecorrido.lastIndexOf(posicion);
+        
+        if (indicePos != -1)
+            castigo = 99 - (agente.caminoRecorrido.size() - indicePos);
+            
+        return (distancia );
+    } 
 }

@@ -1,7 +1,5 @@
 package practica2;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author alvaro2311

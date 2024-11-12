@@ -1,17 +1,17 @@
 
 package practica2;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alvaro2311
  */
 public class MovimientoNoreste implements Movimiento{
     
-    private Entorno entorno;
     private Agente agente;
     
-    public MovimientoNoreste(Entorno entorno, Agente agente){
-        this.entorno = entorno;
+    public MovimientoNoreste(Agente agente){
         this.agente = agente;
     }
     
@@ -21,8 +21,8 @@ public class MovimientoNoreste implements Movimiento{
         
         // Dada la pos del agente, comprueba si puede moverse al noreste
         if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NORESTE))
-            distanciaNoreste = getUtility(entorno, agente.filAgente-1,agente.colAgente+1, agente.caminoRecorrido);
-
+            distanciaNoreste = getUtility();
+            System.out.println("Distancia Noreste: " + distanciaNoreste);
         return distanciaNoreste;
     }
     
@@ -35,4 +35,22 @@ public class MovimientoNoreste implements Movimiento{
     public int getColumna(){
         return agente.colAgente+1;
     }    
+
+    public double getUtility() {
+        int distancia_y = Math.abs(agente.filMeta - agente.filAgente-1);
+        int distancia_x = Math.abs(agente.colMeta - agente.colAgente+1);
+        double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
+        
+        ArrayList<Integer> posicion = new ArrayList<Integer>();
+        posicion.add(agente.filAgente);
+        posicion.add(agente.colAgente);
+        
+        int castigo = 0;
+        int indicePos = agente.caminoRecorrido.lastIndexOf(posicion);
+        
+        if (indicePos != -1)
+            castigo = 99 - (agente.caminoRecorrido.size() - indicePos);
+            
+        return (distancia );
+    }
 }

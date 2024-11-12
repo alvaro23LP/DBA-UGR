@@ -9,11 +9,9 @@ import java.util.ArrayList;
  */
 public class MovimientoEste implements Movimiento{
     
-    private Entorno entorno;
     private Agente agente;
     
-    public MovimientoEste (Entorno entorno, Agente agente){
-        this.entorno = entorno;
+    public MovimientoEste ( Agente agente){
         this.agente = agente;
     }
     
@@ -23,8 +21,8 @@ public class MovimientoEste implements Movimiento{
         
         // Dada la pos del agente, comprueba si puede moverse al este
         if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.ESTE))
-            distanciaEste = getUtility(entorno, agente.filAgente,agente.colAgente+1, agente.caminoRecorrido);
-
+            distanciaEste = getUtility();
+            System.out.println("Distancia Este: " + distanciaEste);
         return distanciaEste;
     }
     
@@ -38,9 +36,9 @@ public class MovimientoEste implements Movimiento{
         return agente.colAgente+1;
     }    
 
-/*     public double getUtility() {
+    public double getUtility() {
         int distancia_y = Math.abs(agente.filMeta - agente.filAgente);
-        int distancia_x = Math.abs(agente.colMeta - agente.colAgente);
+        int distancia_x = Math.abs(agente.colMeta - agente.colAgente+1);
         double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
         
         ArrayList<Integer> posicion = new ArrayList<Integer>();
@@ -53,6 +51,6 @@ public class MovimientoEste implements Movimiento{
         if (indicePos != -1)
             castigo = 99 - (agente.caminoRecorrido.size() - indicePos);
             
-        return (distancia + castigo);
-    } */
+        return (distancia );
+    }
 }

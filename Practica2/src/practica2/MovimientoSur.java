@@ -1,17 +1,17 @@
 
 package practica2;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alvaro2311
  */
 public class MovimientoSur implements Movimiento{
     
-    private Entorno entorno;
     private Agente agente;
     
-    public MovimientoSur (Entorno entorno, Agente agente){
-        this.entorno = entorno;
+    public MovimientoSur (Agente agente){
         this.agente = agente;
     }
     
@@ -21,20 +21,11 @@ public class MovimientoSur implements Movimiento{
         
         // Dada la pos del agente, comprueba si puede moverse al sur
         if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SUR)) 
-            distanciaSur = getUtility(entorno, agente.filAgente+1,agente.colAgente, agente.caminoRecorrido);
-        
+            distanciaSur = getUtility();
+            System.out.println("Distancia Sur: " + distanciaSur);
         return distanciaSur;
     }
 
-/*     @Override
-    public double calculaMovimiento(){
-        double distanciaSur = -1;
-        
-        if (entorno.movimientoPosible(entorno.filAgente+1,entorno.colAgente)) 
-            distanciaSur = getUtility(entorno, entorno.filAgente+1,entorno.colAgente, agente.caminoRecorrido);
-        
-        return distanciaSur;
-    } */
     
     @Override
     public int getFila(){
@@ -44,5 +35,23 @@ public class MovimientoSur implements Movimiento{
     @Override
     public int getColumna(){
         return agente.colAgente;
+    }
+
+    public double getUtility() {
+        int distancia_y = Math.abs(agente.filMeta - agente.filAgente+1);
+        int distancia_x = Math.abs(agente.colMeta - agente.colAgente);
+        double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
+        
+        ArrayList<Integer> posicion = new ArrayList<Integer>();
+        posicion.add(agente.filAgente);
+        posicion.add(agente.colAgente);
+        
+        int castigo = 0;
+        int indicePos = agente.caminoRecorrido.lastIndexOf(posicion);
+        
+        if (indicePos != -1)
+            castigo = 99 - (agente.caminoRecorrido.size() - indicePos);
+            
+        return (distancia);
     }
 }

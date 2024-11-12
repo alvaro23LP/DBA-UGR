@@ -23,14 +23,14 @@ public class MejorMovimientoBehaviour extends Behaviour{
     public MejorMovimientoBehaviour(Entorno entornoAgente, Agente agente) {
         this.entorno = entornoAgente;
         this.agente = agente;
-        movNorte = new MovimientoNorte(entornoAgente, agente);
-        movSur = new MovimientoSur(entornoAgente, agente);
-        movEste = new MovimientoEste(entornoAgente, agente);
-        movOeste = new MovimientoOeste(entornoAgente, agente);
-        movNoreste = new MovimientoNoreste(entornoAgente, agente);
-        movNoroeste = new MovimientoNoroeste(entornoAgente, agente);
-        movSureste = new MovimientoSureste(entornoAgente, agente);
-        movSuroeste = new MovimientoSuroeste(entornoAgente, agente);
+        movNorte = new MovimientoNorte(agente);
+        movSur = new MovimientoSur(agente);
+        movEste = new MovimientoEste(agente);
+        movOeste = new MovimientoOeste(agente);
+        movNoreste = new MovimientoNoreste(agente);
+        movNoroeste = new MovimientoNoroeste(agente);
+        movSureste = new MovimientoSureste(agente);
+        movSuroeste = new MovimientoSuroeste(agente);
     }
     
     @Override
