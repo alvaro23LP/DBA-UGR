@@ -1,0 +1,22 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+	  {
+		"label": "run-ant",
+		"type": "shell",
+		"command": "ant",
+		"args": [
+		  "run"
+		],
+		"options": {
+		  "cwd": "${workspaceFolder}/Practica2"
+		},
+		"group": {
+		  "kind": "build",
+		  "isDefault": true
+		},
+		"problemMatcher": []
+	  }
+	]
+  }
+  

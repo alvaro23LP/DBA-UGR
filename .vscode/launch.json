@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "P2",
+            "request": "launch",
+            "mainClass": "practica2.P2",
+            "projectName": "DBA-UGR_27a8f163"
+        },
+        {
+            "type": "java",
+            "name": "Run Ant Task",
+            "request": "launch",
+            "preLaunchTask": "run-ant",
+            "mainClass": "practica2.P2",
+            "projectName": "Practica2"
+        }
+    ]
+}
