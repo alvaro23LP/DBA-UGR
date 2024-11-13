@@ -47,7 +47,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
         agente.actualizarVistaAlrededor = entorno.actualizarEntornoAgente();
 
         //Comprobamos movimiento Norte, devuelve -1 si no puede moverse
-        double norte = movNorte.calculaMovimiento();
+        double norte = movNorte.calculaValorMovimiento();
         if (norte != -1) {            
            if (norte < mejorDistancia) {
                 mejorDistancia = norte;
@@ -57,7 +57,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
         }         
        
        //Comprobamos movimiento Este, devuelve -1 si no puede moverse
-       double este = movEste.calculaMovimiento();
+       double este = movEste.calculaValorMovimiento();
        if(este != -1){
             if (este < mejorDistancia) {
                 mejorDistancia = este;
@@ -67,7 +67,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
         }
        
        //Comprobamos movimiento Sur, devuelve -1 si no puede moverse
-       double sur = movSur.calculaMovimiento();
+       double sur = movSur.calculaValorMovimiento();
        if (sur != -1) {            
             if (sur < mejorDistancia) {
                 mejorDistancia = sur;
@@ -77,7 +77,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
        }
        
        //Comprobamos movimiento Oeste, devuelve -1 si no puede moverse
-       double oeste = movOeste.calculaMovimiento();
+       double oeste = movOeste.calculaValorMovimiento();
        if(oeste != -1){
             if (oeste < mejorDistancia) {
                 mejorDistancia = oeste;
@@ -87,7 +87,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
        }
        
        //Comprobamos movimiento Noreste, devuelve -1 si no puede moverse
-       double norEste = movNoreste.calculaMovimiento();
+       double norEste = movNoreste.calculaValorMovimiento();
        if(norEste != -1){
             if (norEste < mejorDistancia) {
                 mejorDistancia = norEste;
@@ -97,7 +97,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
        }
        
        //Comprobamos movimiento Noroeste, devuelve -1 si no puede moverse
-       double norOeste = movNoroeste.calculaMovimiento();
+       double norOeste = movNoroeste.calculaValorMovimiento();
        if(norOeste != -1){
             if (norOeste < mejorDistancia) {
                 mejorDistancia = norOeste;
@@ -107,7 +107,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
        }
        
        //Comprobamos movimiento Sureste, devuelve -1 si no puede moverse
-       double surEste = movSureste.calculaMovimiento();
+       double surEste = movSureste.calculaValorMovimiento();
        if(surEste != -1){
             if (surEste < mejorDistancia) {
                 mejorDistancia = surEste;
@@ -117,7 +117,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
        }
        
        //Comprobamos movimiento Suroeste, devuelve -1 si no puede moverse
-       double surOeste = movSuroeste.calculaMovimiento();
+       double surOeste = movSuroeste.calculaValorMovimiento();
        if(surOeste != -1){
             if (surOeste < mejorDistancia) {
                 mejorDistancia = surOeste;

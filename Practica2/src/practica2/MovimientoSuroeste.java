@@ -17,7 +17,7 @@ public class MovimientoSuroeste implements Movimiento{
     }
     
     @Override
-    public double calculaMovimiento(){
+    public double calculaValorMovimiento(){
         double distanciaSuroeste = -1;
         
         // Dada la pos del agente, comprueba si puede moverse al suroeste

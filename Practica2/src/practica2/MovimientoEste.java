@@ -17,7 +17,7 @@ public class MovimientoEste implements Movimiento{
     }
     
     @Override
-    public double calculaMovimiento(){
+    public double calculaValorMovimiento(){
         double distanciaEste = -1;
         
         // Dada la pos del agente, comprueba si puede moverse al este

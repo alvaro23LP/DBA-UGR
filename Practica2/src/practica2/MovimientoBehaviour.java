@@ -24,12 +24,10 @@ public class MovimientoBehaviour extends Behaviour {
         colMovimiento = (!agente.caminoRecorrido.isEmpty()) ? agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1).get(1) : -1;
         
         //Actualiza la posición del agente 
-        if (entorno.movimientoPosible(filaMovimiento, colMovimiento)) {
-            entorno.filAgente = filaMovimiento;
-            entorno.colAgente = colMovimiento;
-            agente.filAgente = filaMovimiento;
-            agente.colAgente = colMovimiento;
-        }
+        entorno.filaAgente = filaMovimiento;
+        entorno.columnaAgente = colMovimiento;
+        agente.filAgente = filaMovimiento;
+        agente.colAgente = colMovimiento;
         
         entorno.mostrarEnTorno();      
     }

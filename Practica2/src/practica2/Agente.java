@@ -32,12 +32,12 @@ public class Agente extends Agent{
         }
 
         // Inicializar posicion del agente
-        this.filAgente = entorno.filAgente;
-        this.colAgente = entorno.colAgente;
+        this.filAgente = entorno.filaAgente;
+        this.colAgente = entorno.columnaAgente;
 
         // Inicializar posicion de la meta
-        this.filMeta = entorno.filMeta;
-        this.colMeta = entorno.colMeta;
+        this.filMeta = entorno.filaMeta;
+        this.colMeta = entorno.columnaMeta;
         
         // Comportamientos
         addBehaviour(new MejorMovimientoBehaviour(entorno, this));
@@ -95,5 +95,7 @@ public class Agente extends Agent{
     
         return posible;
     }
+
+    
 
 }

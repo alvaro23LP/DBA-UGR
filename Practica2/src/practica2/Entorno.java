@@ -8,17 +8,17 @@ import java.util.ArrayList;
 public class Entorno {
     
     Mapa mapa;
-    int filAgente, colAgente;
-    int filMeta, colMeta;    
+    int filaAgente, columnaAgente;
+    int filaMeta, columnaMeta;    
     
     public Entorno(Mapa mapaEntorno, int filaAgente, int columnaAgente,
                     int filaMeta, int columnaMeta) {
         
         mapa = mapaEntorno;
-        filAgente = filaAgente;
-        colAgente = columnaAgente;
-        filMeta = filaMeta;
-        colMeta = columnaMeta;
+        this.filaAgente = filaAgente;
+        this.columnaAgente = columnaAgente;
+        this.filaMeta = filaMeta;
+        this.columnaMeta = columnaMeta;
     }
     
     public void mostrarEnTorno() {
@@ -28,10 +28,10 @@ public class Entorno {
         for (int i = 0; i < mapa.filas; i++) {
 
             for (int j = 0; j < mapa.columnas; j++) {
-                if (filAgente == i && colAgente == j){
+                if (filaAgente == i && columnaAgente == j){
                     System.out.print("A\t");
                 }
-                else if (filMeta == i && colMeta == j) {
+                else if (filaMeta == i && columnaMeta == j) {
                     System.out.print("X\t");
                 }
                 else {
@@ -45,14 +45,14 @@ public class Entorno {
     public ArrayList<Integer> actualizarEntornoAgente() {
         ArrayList<Integer> entorno = new ArrayList<>();
         
-        entorno.add(sensorNoroesteAgente(filAgente, colAgente));
-        entorno.add(sensorNorteAgente(filAgente, colAgente));
-        entorno.add(sensorNoresteAgente(filAgente, colAgente));
-        entorno.add(sensorEsteAgente(filAgente, colAgente));
-        entorno.add(sensorSuresteAgente(filAgente, colAgente));
-        entorno.add(sensorSurAgente(filAgente, colAgente));
-        entorno.add(sensorSuroesteAgente(filAgente, colAgente));
-        entorno.add(sensorOesteAgente(filAgente, colAgente));
+        entorno.add(sensorNoroesteAgente(filaAgente, columnaAgente));
+        entorno.add(sensorNorteAgente(filaAgente, columnaAgente));
+        entorno.add(sensorNoresteAgente(filaAgente, columnaAgente));
+        entorno.add(sensorEsteAgente(filaAgente, columnaAgente));
+        entorno.add(sensorSuresteAgente(filaAgente, columnaAgente));
+        entorno.add(sensorSurAgente(filaAgente, columnaAgente));
+        entorno.add(sensorSuroesteAgente(filaAgente, columnaAgente));
+        entorno.add(sensorOesteAgente(filaAgente, columnaAgente));
 
         return entorno;
     }
@@ -128,70 +128,4 @@ public class Entorno {
             return -1;
         }
     }
-
-
-    public boolean movimientoPosible(int filaMovimiento, int columnaMovimiento) {
-        boolean posible = false;
-    
-        if (0 > filaMovimiento || filaMovimiento >= mapa.filas)
-            posible = false;
-        else if (0 > columnaMovimiento || columnaMovimiento >= mapa.columnas)
-            posible = false;
-        else if (mapa.mapa[filaMovimiento][columnaMovimiento] == 0)
-            posible = true;
-        else if (mapa.mapa[filaMovimiento][columnaMovimiento] == -1)
-            posible = false;
-    
-        return posible;
-    }
-
-    /* public boolean movimientoPosible(int filaMovimiento, int columnaMovimiento) {
-        boolean posible = false;
-        
-        if (0 > filaMovimiento || filaMovimiento >= mapa.filas)
-            posible = false;
-        else if (0 > columnaMovimiento || columnaMovimiento >= mapa.columnas)
-            posible = false;
-        else if (mapa.mapa[filaMovimiento][columnaMovimiento] == 0)
-            posible = true;
-        
-        return posible;    
-    }
-    
-    public boolean movimientoPosibleDiagonal(int filaMovimiento, int columnaMovimiento, DIRECCIONES direccion) {
-        //Comprobamos que la casilla a la que se mueve es una casilla válida
-        boolean posible = movimientoPosible(filaMovimiento, columnaMovimiento);
-        
-        //Como es un movimiento en diagonal hay que hacer más comprobaciones
-        if (posible) {
-            switch (direccion) {
-                case NORTE:
-                    // Add logic for NORTE if needed
-                    break;
-                case SUR:
-                    // Add logic for SUR if needed
-                    break;
-                case ESTE:
-                    // Add logic for ESTE if needed
-                    break;
-                case OESTE:
-                    // Add logic for OESTE if needed
-                    break;
-                case NORESTE:
-                    posible = (mapa.mapa[filAgente-1][colAgente] == 0 && mapa.mapa[filAgente][colAgente+1] == 0);
-                    break;
-                case NOROESTE:
-                    posible = (mapa.mapa[filAgente-1][colAgente] == 0 && mapa.mapa[filAgente][colAgente-1] == 0);
-                    break;
-                case SURESTE:
-                    posible = (mapa.mapa[filAgente+1][colAgente] == 0 && mapa.mapa[filAgente][colAgente+1] == 0);
-                    break;
-                case SUROESTE:
-                    posible = (mapa.mapa[filAgente+1][colAgente] == 0 && mapa.mapa[filAgente][colAgente-1] == 0);
-                    break;
-            }
-        }
-        
-        return posible;
-    }     */
 }

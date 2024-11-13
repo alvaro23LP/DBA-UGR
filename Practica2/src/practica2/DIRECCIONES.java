@@ -1,5 +1,6 @@
 package practica2;
 
+// ENUMERADO DE DIRECCIONES 
 public enum DIRECCIONES {
     NORTE,
     NORESTE,

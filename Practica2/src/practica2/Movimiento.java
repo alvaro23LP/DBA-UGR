@@ -1,32 +1,14 @@
 
 package practica2;
 
-
+// Interfaz que define los métodos que deben implementar los movimientos
 public interface Movimiento {
     
-    public double calculaMovimiento();
+    public double calculaValorMovimiento();
     
     public int getFila();
     
     public int getColumna();
-       
-    /*default double getUtility(Entorno entorno, int fila, int columna, ArrayList<ArrayList<Integer>> caminoRecorrido) {
-        int distancia_y = Math.abs(entorno.filMeta - fila);
-        int distancia_x = Math.abs(entorno.colMeta - columna);
-        double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
-        
-        ArrayList<Integer> posicion = new ArrayList<Integer>();
-        posicion.add(fila);
-        posicion.add(columna);
-        
-        int castigo = 0;
-        int indicePos = caminoRecorrido.lastIndexOf(posicion);
-        
-        if (indicePos != -1)
-            castigo = 99 - (caminoRecorrido.size() - indicePos);
-            
-        return (distancia + castigo);
-    }*/
 
     double getUtility() ;
 }

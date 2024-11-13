@@ -1,0 +1,46 @@
+package GUI;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class MapaPanel extends JPanel {
+    private Mapa mapa;
+    private int filAgente, colAgente;
+    private int filMeta, colMeta;
+
+    public MapaPanel(Mapa mapa, int filAgente, int colAgente, int filMeta, int colMeta) {
+        this.mapa = mapa;
+        this.filAgente = filAgente;
+        this.colAgente = colAgente;
+        this.filMeta = filMeta;
+        this.colMeta = colMeta;
+    }
+
+    public void actualizarPosicionAgente(int filAgente, int colAgente) {
+        this.filAgente = filAgente;
+        this.colAgente = colAgente;
+        repaint();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        int cellSize = 20;
+        for (int y = 0; y < mapa.mapa.length; y++) {
+            for (int x = 0; x < mapa.mapa[0].length; x++) {
+                if (mapa.mapa[y][x] == -1) {
+                    g.setColor(Color.BLACK);
+                } else {
+                    g.setColor(Color.WHITE);
+                }
+                g.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                g.setColor(Color.GRAY);
+                g.drawRect(x * cellSize, y * cellSize, cellSize, cellSize);
+            }
+        }
+        g.setColor(Color.RED);
+        g.fillOval(colMeta * cellSize, filMeta * cellSize, cellSize, cellSize);
+        g.setColor(Color.BLUE);
+        g.fillOval(colAgente * cellSize, filAgente * cellSize, cellSize, cellSize);
+    }
+}

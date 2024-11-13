@@ -20,7 +20,8 @@ public class P2 {
         mapa = new Mapa();
         //String ruta = "./mapas/mapWithDiagonalWall.txt";
         //String ruta = "./mapas/mapWithComplexObstacle1.txt";
-        String ruta = "./mapas/mapWithHorizontalWall.txt";
+        //String ruta = "./mapas/mapWithHorizontalWall.txt";
+        String ruta = "./mapas/mapComplejo.txt";
 
         mapa.readMap(ruta);
         
