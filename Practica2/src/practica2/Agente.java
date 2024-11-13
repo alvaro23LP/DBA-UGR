@@ -11,12 +11,21 @@ public class Agente extends Agent{
 
     Entorno entorno;
     public ArrayList<ArrayList<Integer>> caminoRecorrido;
+    public ArrayList<ArrayList<Integer>> noVolverAPasar;
+    public ArrayList<Integer> actualizarVistaAlrededor;
+    public boolean dejarDeSeguirDiagonal = false;
+    public boolean dejarDeSeguirPared = false;
+    public int rodear1D = 0;
+    public int rodear2D = 0;
+    public int rodear1R = 0;
+    public int rodear2R = 0;
     int filAgente, colAgente, filMeta, colMeta;
    
-
     protected void setup() {
         // Inicializar caminoRecorrido
         caminoRecorrido = new ArrayList<>();
+        noVolverAPasar = new ArrayList<>();
+        actualizarVistaAlrededor = new ArrayList<>();
 
         // Obtener los argumentos
         Object[] args = getArguments();

@@ -31,22 +31,26 @@ public class MejorMovimientoBehaviour extends Behaviour{
         movNoroeste = new MovimientoNoroeste(agente);
         movSureste = new MovimientoSureste(agente);
         movSuroeste = new MovimientoSuroeste(agente);
+
     }
     
     @Override
     public void action() {
         mejorDistancia = 99999999;
-       //Comprobamos que movimiento es mejor
-       
-       //Comprobamos movimiento norte
-       double norte = movNorte.calculaMovimiento();
-       if (norte != -1) {            
-            if (norte < mejorDistancia) {
+
+        if (agente.actualizarVistaAlrededor != null)
+            agente.actualizarVistaAlrededor.clear();
+
+        agente.actualizarVistaAlrededor = entorno.actualizarEntornoAgente();
+
+        double norte = movNorte.calculaMovimiento();
+        if (norte != -1) {            
+           if (norte < mejorDistancia) {
                 mejorDistancia = norte;
                 filaMovimiento = movNorte.getFila();
                 colMovimiento = movNorte.getColumna();
-            }            
-       }
+            }   
+        }         
        
        //Comprobamos movimiento Este
        double este = movEste.calculaMovimiento();
@@ -124,10 +128,152 @@ public class MejorMovimientoBehaviour extends Behaviour{
            System.out.print(e);
        }
        
+       //Forzamos a que pase la diagonal
+       if (agente.dejarDeSeguirDiagonal) {
+        if (agente.caminoRecorrido.size() > 2) {
+            agente.dejarDeSeguirDiagonal = false;
+        
+            ArrayList<Integer> ultima_pos = agente.caminoRecorrido.get(agente.caminoRecorrido.size() - 2);
+            int x = ultima_pos.get(0);
+            int y = ultima_pos.get(1);
+        
+        
+        //Suroeste
+        if (agente.filAgente-1 == x && agente.colAgente+1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SUROESTE)){
+            //Suroeste muro arriba
+            if (agente.actualizarVistaAlrededor.get(1) == -1) {
+                filaMovimiento = agente.filAgente-1;
+                colMovimiento = agente.colAgente-1;
+            }
+            //Suroeste muro derecha
+            else{
+                filaMovimiento = agente.filAgente+1;
+                colMovimiento = agente.colAgente+1;
+            }
+        
+        agente.dejarDeSeguirDiagonal = false;
+        
+        }
+
+        //Sureste
+        if (agente.filAgente-1 == x && agente.colAgente-1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SURESTE)){
+            //Sureste muro arriba
+            if (agente.actualizarVistaAlrededor.get(1) == -1) {
+                filaMovimiento = agente.filAgente-1;
+                colMovimiento = agente.colAgente+1;
+            }
+            //Sureste muro abajo
+            else{
+                filaMovimiento = agente.filAgente+1;
+                colMovimiento = agente.colAgente-1;
+            }
+
+        agente.dejarDeSeguirDiagonal = false;
+        }
+
+        //Noroeste
+        if (agente.filAgente+1 == x && agente.colAgente+1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NOROESTE)){
+            //Noroeste muro derecha
+            if (agente.actualizarVistaAlrededor.get(3) == -1) {
+                filaMovimiento = agente.filAgente-1;
+                colMovimiento = agente.colAgente+1;
+            }
+            //Noroeste muro abajo
+            else{
+                filaMovimiento = agente.filAgente+1;
+                colMovimiento = agente.colAgente-1;
+            }
+
+        agente.dejarDeSeguirDiagonal = false;
+        }
+
+        //Noreste
+        if (agente.filAgente+1 == x && agente.colAgente-1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NORESTE)){
+            //Noreste muro arriba
+            if (agente.actualizarVistaAlrededor.get(7) == -1) {
+                filaMovimiento = agente.filAgente-1;
+                colMovimiento = agente.colAgente-1;
+            }
+            //Noreste muro abajo
+            else{
+                filaMovimiento = agente.filAgente+1;
+                colMovimiento = agente.colAgente+1;
+            }
+
+        agente.dejarDeSeguirDiagonal = false;
+        }
+    }
+    }
+
+    //forzamos a que pase el muro
+    if (agente.dejarDeSeguirPared){
+        ArrayList<Integer> ultima_pos = agente.caminoRecorrido.get(agente.caminoRecorrido.size() - 2);
+        int x = ultima_pos.get(0);
+        int y = ultima_pos.get(1);
+        
+        //Norte
+        if (agente.filAgente+1 == x && agente.colAgente == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NORTE)){
+            //Suroeste muro arriba
+            if (agente.actualizarVistaAlrededor.get(7) == -1) {
+                filaMovimiento = agente.filAgente-1;
+                colMovimiento = agente.colAgente-1;
+            }
+            else{
+                filaMovimiento = agente.filAgente-1;
+                colMovimiento = agente.colAgente+1;
+            }
+            //Suroeste muro derecha
+            
+        
+        agente.dejarDeSeguirPared = false;
+        }
+
+        //Oeste
+        if (agente.filAgente == x && agente.colAgente+1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.OESTE)){
+            //Sureste muro abajo
+            if (agente.actualizarVistaAlrededor.get(5) == -1) {
+                filaMovimiento = agente.filAgente+1;
+                colMovimiento = agente.colAgente-1;
+            }
+            agente.dejarDeSeguirPared = false;
+        }
+
+        //Este
+        if (agente.filAgente == x && agente.colAgente-1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.ESTE)){
+            //Noroeste muro abajo
+            if (agente.actualizarVistaAlrededor.get(5) == -1) {
+                filaMovimiento = agente.filAgente+1;
+                colMovimiento = agente.colAgente+1;
+            }
+            else{
+                filaMovimiento = agente.filAgente-1;
+                colMovimiento = agente.colAgente+1;
+            }
+            agente.dejarDeSeguirPared = false;
+        }
+
+        //Sur
+        if (agente.filAgente-1 == x && agente.colAgente == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SUR)){
+            //Noreste muro arriba
+            if (agente.actualizarVistaAlrededor.get(3) == -1) {
+                filaMovimiento = agente.filAgente+1;
+                colMovimiento = agente.colAgente+1;
+            }
+            
+            agente.dejarDeSeguirPared = false;
+        }
+    }
+
        ArrayList<Integer> posicion = new ArrayList<Integer>();
        posicion.add(filaMovimiento);
        posicion.add(colMovimiento);
-       
+
+        for (ArrayList<Integer> pos : agente.caminoRecorrido) {
+            if (pos.equals(posicion)) {
+                agente.noVolverAPasar.add(agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1));  
+            }
+        }
+    
        agente.caminoRecorrido.add(posicion);       
     }
     
