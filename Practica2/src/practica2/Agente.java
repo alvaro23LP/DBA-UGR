@@ -17,8 +17,6 @@ public class Agente extends Agent{
     public boolean dejarDeSeguirPared = false;
     public int rodear1D = 0;
     public int rodear2D = 0;
-    public int rodear1R = 0;
-    public int rodear2R = 0;
     int filAgente, colAgente, filMeta, colMeta;
    
     protected void setup() {

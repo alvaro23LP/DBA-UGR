@@ -43,13 +43,12 @@ public class MovimientoNorte implements Movimiento {
         int distancia_x = Math.abs(agente.colMeta - agente.colAgente);
         double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
         
+        //Comprueba si tiene una pared y la meta esta al otro lado
         if (agente.actualizarVistaAlrededor.get(0) == -1 && agente.actualizarVistaAlrededor.get(7) == -1 && agente.actualizarVistaAlrededor.get(6) == -1 && agente.colMeta < agente.colAgente) {    
             siguiendoPared = true;
-            agente.rodear1D = 1;
         }
         else if (agente.actualizarVistaAlrededor.get(2) == -1 && agente.actualizarVistaAlrededor.get(3) == -1 && agente.actualizarVistaAlrededor.get(4) == -1 && agente.colMeta > agente.colAgente){
             siguiendoPared = true;
-            agente.rodear2R = 2;
         }
         else{
             if (siguiendoPared){
@@ -59,18 +58,21 @@ public class MovimientoNorte implements Movimiento {
         }
 
         if (siguiendoPared)
-            distancia -= 50;
+            distancia -= 50;  //Le damos prefrencia a que siga la pared
 
         ArrayList<Integer> posicion = new ArrayList<>();
         posicion.add(agente.filAgente-1);
         posicion.add(agente.colAgente);
 
+
+        //Comprueba si ya ha pasado por esa posicion para evitar ciclos
         for (ArrayList<Integer> pos : agente.caminoRecorrido) {
             if (pos.equals(posicion)) {
                 distancia += 5;
             }
         }
 
+        //Comprueba si no puede volver a pasar por esa posicion
         if (agente.noVolverAPasar != null)
         for (ArrayList<Integer> pos : agente.noVolverAPasar) {
             if (pos.equals(posicion)) {

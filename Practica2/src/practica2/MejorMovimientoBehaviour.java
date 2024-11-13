@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class MejorMovimientoBehaviour extends Behaviour{
     Entorno entorno;
-    double mejorDistancia = 99999999;
+    double mejorDistancia;
     int filaMovimiento, colMovimiento;
     Agente agente;
     
@@ -31,18 +31,22 @@ public class MejorMovimientoBehaviour extends Behaviour{
         movNoroeste = new MovimientoNoroeste(agente);
         movSureste = new MovimientoSureste(agente);
         movSuroeste = new MovimientoSuroeste(agente);
+        mejorDistancia = Double.MAX_VALUE;
 
     }
     
     @Override
     public void action() {
-        mejorDistancia = 99999999;
+        mejorDistancia = Double.MAX_VALUE;
 
+        //Limpiamos la percepciones si tenia
         if (agente.actualizarVistaAlrededor != null)
             agente.actualizarVistaAlrededor.clear();
 
+        //Actualizamos la percepcion del agente
         agente.actualizarVistaAlrededor = entorno.actualizarEntornoAgente();
 
+        //Comprobamos movimiento Norte, devuelve -1 si no puede moverse
         double norte = movNorte.calculaMovimiento();
         if (norte != -1) {            
            if (norte < mejorDistancia) {
@@ -52,7 +56,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
             }   
         }         
        
-       //Comprobamos movimiento Este
+       //Comprobamos movimiento Este, devuelve -1 si no puede moverse
        double este = movEste.calculaMovimiento();
        if(este != -1){
             if (este < mejorDistancia) {
@@ -62,7 +66,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
             }
         }
        
-       //Comprobamos movimiento Sur
+       //Comprobamos movimiento Sur, devuelve -1 si no puede moverse
        double sur = movSur.calculaMovimiento();
        if (sur != -1) {            
             if (sur < mejorDistancia) {
@@ -72,7 +76,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
             }            
        }
        
-       //Comprobamos movimiento Oeste
+       //Comprobamos movimiento Oeste, devuelve -1 si no puede moverse
        double oeste = movOeste.calculaMovimiento();
        if(oeste != -1){
             if (oeste < mejorDistancia) {
@@ -82,7 +86,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
             }
        }
        
-       //Comprobamos movimiento Noreste
+       //Comprobamos movimiento Noreste, devuelve -1 si no puede moverse
        double norEste = movNoreste.calculaMovimiento();
        if(norEste != -1){
             if (norEste < mejorDistancia) {
@@ -92,7 +96,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
             }
        }
        
-       //Comprobamos movimiento Noroeste
+       //Comprobamos movimiento Noroeste, devuelve -1 si no puede moverse
        double norOeste = movNoroeste.calculaMovimiento();
        if(norOeste != -1){
             if (norOeste < mejorDistancia) {
@@ -102,7 +106,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
             }
        }
        
-       //Comprobamos movimiento Sureste
+       //Comprobamos movimiento Sureste, devuelve -1 si no puede moverse
        double surEste = movSureste.calculaMovimiento();
        if(surEste != -1){
             if (surEste < mejorDistancia) {
@@ -112,7 +116,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
             }
        }
        
-       //Comprobamos movimiento Suroeste
+       //Comprobamos movimiento Suroeste, devuelve -1 si no puede moverse
        double surOeste = movSuroeste.calculaMovimiento();
        if(surOeste != -1){
             if (surOeste < mejorDistancia) {
@@ -128,25 +132,26 @@ public class MejorMovimientoBehaviour extends Behaviour{
            System.out.print(e);
        }
        
-       //Forzamos a que pase la diagonal
+       //Forzamos a que pase el muro diagonal una vez que lo haya rodeado
        if (agente.dejarDeSeguirDiagonal) {
         if (agente.caminoRecorrido.size() > 2) {
             agente.dejarDeSeguirDiagonal = false;
         
+            //Cojemos la ultima posicion del camino recorrido para saber en que direccion la estaba recorriendo
             ArrayList<Integer> ultima_pos = agente.caminoRecorrido.get(agente.caminoRecorrido.size() - 2);
             int x = ultima_pos.get(0);
             int y = ultima_pos.get(1);
         
         
         //Suroeste
-        if (agente.filAgente-1 == x && agente.colAgente+1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SUROESTE)){
+        if (agente.filAgente-1 == x && agente.colAgente+1 == y){
             //Suroeste muro arriba
-            if (agente.actualizarVistaAlrededor.get(1) == -1) {
+            if (agente.actualizarVistaAlrededor.get(1) == -1 && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NOROESTE)) {
                 filaMovimiento = agente.filAgente-1;
                 colMovimiento = agente.colAgente-1;
             }
-            //Suroeste muro derecha
-            else{
+            //Suroeste caso contrario
+            else if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SURESTE)){
                 filaMovimiento = agente.filAgente+1;
                 colMovimiento = agente.colAgente+1;
             }
@@ -156,14 +161,14 @@ public class MejorMovimientoBehaviour extends Behaviour{
         }
 
         //Sureste
-        if (agente.filAgente-1 == x && agente.colAgente-1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SURESTE)){
+        if (agente.filAgente-1 == x && agente.colAgente-1 == y){
             //Sureste muro arriba
-            if (agente.actualizarVistaAlrededor.get(1) == -1) {
+            if (agente.actualizarVistaAlrededor.get(1) == -1 && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NORESTE)) {
                 filaMovimiento = agente.filAgente-1;
                 colMovimiento = agente.colAgente+1;
             }
-            //Sureste muro abajo
-            else{
+            //Sureste caso contrario
+            else if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SUROESTE)){
                 filaMovimiento = agente.filAgente+1;
                 colMovimiento = agente.colAgente-1;
             }
@@ -172,14 +177,14 @@ public class MejorMovimientoBehaviour extends Behaviour{
         }
 
         //Noroeste
-        if (agente.filAgente+1 == x && agente.colAgente+1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NOROESTE)){
+        if (agente.filAgente+1 == x && agente.colAgente+1 == y){
             //Noroeste muro derecha
-            if (agente.actualizarVistaAlrededor.get(3) == -1) {
+            if (agente.actualizarVistaAlrededor.get(3) == -1 && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NORESTE)) {
                 filaMovimiento = agente.filAgente-1;
                 colMovimiento = agente.colAgente+1;
             }
-            //Noroeste muro abajo
-            else{
+            //Noroeste caso contrario
+            else if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SUROESTE)){
                 filaMovimiento = agente.filAgente+1;
                 colMovimiento = agente.colAgente-1;
             }
@@ -188,14 +193,14 @@ public class MejorMovimientoBehaviour extends Behaviour{
         }
 
         //Noreste
-        if (agente.filAgente+1 == x && agente.colAgente-1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NORESTE)){
+        if (agente.filAgente+1 == x && agente.colAgente-1 == y){
             //Noreste muro arriba
-            if (agente.actualizarVistaAlrededor.get(7) == -1) {
+            if (agente.actualizarVistaAlrededor.get(7) == -1 && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NOROESTE)) {
                 filaMovimiento = agente.filAgente-1;
                 colMovimiento = agente.colAgente-1;
             }
-            //Noreste muro abajo
-            else{
+            //Noreste caso contrario
+            else if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SURESTE)){
                 filaMovimiento = agente.filAgente+1;
                 colMovimiento = agente.colAgente+1;
             }
@@ -205,31 +210,33 @@ public class MejorMovimientoBehaviour extends Behaviour{
     }
     }
 
-    //forzamos a que pase el muro
+    //forzamos a que pase el muro vertical/horizontal una vez que lo haya rodeado
     if (agente.dejarDeSeguirPared){
-        ArrayList<Integer> ultima_pos = agente.caminoRecorrido.get(agente.caminoRecorrido.size() - 2);
-        int x = ultima_pos.get(0);
-        int y = ultima_pos.get(1);
+        if (agente.caminoRecorrido.size() > 2) {
+            agente.dejarDeSeguirPared = false;
+
+            //Cojemos la ultima posicion del camino recorrido para saber en que direccion la estaba recorriendo
+            ArrayList<Integer> ultima_pos = agente.caminoRecorrido.get(agente.caminoRecorrido.size() - 2);
+            int x = ultima_pos.get(0);
+            int y = ultima_pos.get(1);
         
         //Norte
-        if (agente.filAgente+1 == x && agente.colAgente == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NORTE)){
-            //Suroeste muro arriba
-            if (agente.actualizarVistaAlrededor.get(7) == -1) {
+        if (agente.filAgente+1 == x && agente.colAgente == y){
+            //Suroeste muro izquierda
+            if (agente.actualizarVistaAlrededor.get(7) == -1 && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NOROESTE)) {
                 filaMovimiento = agente.filAgente-1;
                 colMovimiento = agente.colAgente-1;
             }
-            else{
+            else if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NORESTE)){
                 filaMovimiento = agente.filAgente-1;
                 colMovimiento = agente.colAgente+1;
-            }
-            //Suroeste muro derecha
-            
+            }            
         
-        agente.dejarDeSeguirPared = false;
+            agente.dejarDeSeguirPared = false;
         }
 
         //Oeste
-        if (agente.filAgente == x && agente.colAgente+1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.OESTE)){
+        if (agente.filAgente == x && agente.colAgente+1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SUROESTE)){
             //Sureste muro abajo
             if (agente.actualizarVistaAlrededor.get(5) == -1) {
                 filaMovimiento = agente.filAgente+1;
@@ -239,13 +246,13 @@ public class MejorMovimientoBehaviour extends Behaviour{
         }
 
         //Este
-        if (agente.filAgente == x && agente.colAgente-1 == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.ESTE)){
+        if (agente.filAgente == x && agente.colAgente-1 == y){
             //Noroeste muro abajo
-            if (agente.actualizarVistaAlrededor.get(5) == -1) {
+            if (agente.actualizarVistaAlrededor.get(5) == -1 && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SURESTE)) {
                 filaMovimiento = agente.filAgente+1;
                 colMovimiento = agente.colAgente+1;
             }
-            else{
+            else if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.NORESTE)){
                 filaMovimiento = agente.filAgente-1;
                 colMovimiento = agente.colAgente+1;
             }
@@ -253,8 +260,8 @@ public class MejorMovimientoBehaviour extends Behaviour{
         }
 
         //Sur
-        if (agente.filAgente-1 == x && agente.colAgente == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SUR)){
-            //Noreste muro arriba
+        if (agente.filAgente-1 == x && agente.colAgente == y && agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SURESTE)){
+            //Noreste muro derecha
             if (agente.actualizarVistaAlrededor.get(3) == -1) {
                 filaMovimiento = agente.filAgente+1;
                 colMovimiento = agente.colAgente+1;
@@ -263,17 +270,20 @@ public class MejorMovimientoBehaviour extends Behaviour{
             agente.dejarDeSeguirPared = false;
         }
     }
+    }
 
        ArrayList<Integer> posicion = new ArrayList<Integer>();
        posicion.add(filaMovimiento);
        posicion.add(colMovimiento);
 
-        for (ArrayList<Integer> pos : agente.caminoRecorrido) {
-            if (pos.equals(posicion)) {
-                agente.noVolverAPasar.add(agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1));  
-            }
-        }
+       //Comprobamos si la posicion ya ha sido visitada para meter a la casilla que nos lleva a ella en noVolverAPasar
+       for (ArrayList<Integer> pos : agente.caminoRecorrido) {
+           if (pos.equals(posicion)) {
+               agente.noVolverAPasar.add(agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1));  
+           }
+       }
     
+       //Añadimos la posicion a caminoRecorrido
        agente.caminoRecorrido.add(posicion);       
     }
     

@@ -47,11 +47,12 @@ public class MovimientoSuroeste implements Movimiento{
         posicion.add(agente.filAgente+1);
         posicion.add(agente.colAgente-1);
         
-        if ((agente.actualizarVistaAlrededor.get(0) == 0 || agente.actualizarVistaAlrededor.get(0) == -1) && agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(7) == -1 && agente.rodear2D != 2) {    
+        ////Comprueba si tiene una pared diagonal
+        if ((agente.actualizarVistaAlrededor.get(0) == 0 || agente.actualizarVistaAlrededor.get(0) == -1) && agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(7) == -1 && agente.rodear2D != 2 && (agente.filMeta < agente.filAgente || agente.colMeta < agente.colAgente)){
             siguiendoDiagonal = true;
             agente.rodear1D = 1;
         }
-        else if ((agente.actualizarVistaAlrededor.get(4) == 0 || agente.actualizarVistaAlrededor.get(4) == -1) && agente.actualizarVistaAlrededor.get(3) == -1 && agente.actualizarVistaAlrededor.get(5) == -1 && agente.rodear1D != 1){
+        else if ((agente.actualizarVistaAlrededor.get(4) == 0 || agente.actualizarVistaAlrededor.get(4) == -1) && agente.actualizarVistaAlrededor.get(3) == -1 && agente.actualizarVistaAlrededor.get(5) == -1 && agente.rodear1D != 1 && (agente.filMeta > agente.filAgente || agente.colMeta > agente.colAgente)){
             siguiendoDiagonal = true;
             agente.rodear2D = 2;
         }
@@ -63,15 +64,16 @@ public class MovimientoSuroeste implements Movimiento{
         }
 
         if (siguiendoDiagonal)
-            distancia -= 50;
+            distancia -= 50;  //Le damos prefrencia a que siga la pared
 
-
+        // Penalizamos si ya ha pasado por esa casilla
         for (ArrayList<Integer> pos : agente.caminoRecorrido) {
             if (pos.equals(posicion)) {
                 distancia += 5;
             }
         }
 
+        // Penalizamos si no puede volver a pasar por esa casilla
         if (agente.noVolverAPasar != null)
         for (ArrayList<Integer> pos : agente.noVolverAPasar) {
             if (pos.equals(posicion)) {
