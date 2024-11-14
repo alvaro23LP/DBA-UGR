@@ -17,36 +17,35 @@ public class MovimientoOeste implements Movimiento{
     
     @Override
     public double calculaValorMovimiento(){
-        double distanciaOeste = -1;
+        double valorOeste = -1;
         
         // Dada la pos del agente, comprueba si puede moverse al oeste
-        if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.OESTE)) 
-            distanciaOeste = getUtility();
-            //System.out.println("Distancia Oeste: " + distanciaOeste);
-            return distanciaOeste;
+        if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.OESTE)) 
+            valorOeste = getUtility();
+        return valorOeste;
     }
     
     @Override
     public int getFila(){
-        return agente.filAgente;
+        return agente.filaAgente;
     }
     
     @Override
     public int getColumna(){
-        return agente.colAgente-1;
+        return agente.columnaAgente-1;
     }
 
 
     public double getUtility() {
-        int distancia_y = Math.abs(agente.filMeta - agente.filAgente);
-        int distancia_x = Math.abs(agente.colMeta - (agente.colAgente-1));
+        int distancia_y = Math.abs(agente.filaMeta - agente.filaAgente);
+        int distancia_x = Math.abs(agente.columnaMeta - (agente.columnaAgente-1));
         double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
         
         //Comprueba si tiene una pared y la meta esta al otro lado
-        if (agente.actualizarVistaAlrededor.get(0) == -1 && agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(2) == -1 && agente.filMeta < agente.filAgente) {    
+        if (agente.actualizarVistaAlrededor.get(0) == -1 && agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(2) == -1 && agente.filaMeta < agente.filaAgente) {    
             siguiendoPared = true;
         }
-        else if (agente.actualizarVistaAlrededor.get(6) == -1 && agente.actualizarVistaAlrededor.get(5) == -1 && agente.actualizarVistaAlrededor.get(4) == -1 && agente.filMeta > agente.filAgente){
+        else if (agente.actualizarVistaAlrededor.get(6) == -1 && agente.actualizarVistaAlrededor.get(5) == -1 && agente.actualizarVistaAlrededor.get(4) == -1 && agente.filaMeta > agente.filaAgente){
             siguiendoPared = true;
         }
         else{
@@ -60,8 +59,8 @@ public class MovimientoOeste implements Movimiento{
             distancia -= 50;  //Le damos prefrencia a que siga la pared
         
         ArrayList<Integer> posicion = new ArrayList<>();
-        posicion.add(agente.filAgente);
-        posicion.add(agente.colAgente-1);
+        posicion.add(agente.filaAgente);
+        posicion.add(agente.columnaAgente-1);
 
         // Comprueba si la posicion a la que se va a mover es una posicion ya recorrida
         for (ArrayList<Integer> pos : agente.caminoRecorrido) {

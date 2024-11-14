@@ -14,7 +14,7 @@ public class Mapa {
     
     int filas;
     int columnas;
-    int[][] mapa;
+    public int[][] mapa;
     
     public Mapa(){
         filas = 0;

@@ -6,35 +6,29 @@ import java.util.ArrayList;
  * @author alvaro2311
  */
 public class Entorno {
-    
     Mapa mapa;
-    int filaAgente, columnaAgente;
-    int filaMeta, columnaMeta;    
+    int filaAgente, columnaAgente,filaMeta, columnaMeta;    
     
-    public Entorno(Mapa mapaEntorno, int filaAgente, int columnaAgente,
-                    int filaMeta, int columnaMeta) {
-        
-        mapa = mapaEntorno;
+    // Constructor
+    public Entorno(Mapa mapaEntorno, int filaAgente, int columnaAgente, int filaMeta, int columnaMeta) {
+        this.mapa = mapaEntorno;
         this.filaAgente = filaAgente;
         this.columnaAgente = columnaAgente;
         this.filaMeta = filaMeta;
         this.columnaMeta = columnaMeta;
     }
     
-    public void mostrarEnTorno() {
-        // Imprimir la matriz
-        System.out.println("Numero filas: " + mapa.filas);
-        System.out.println("Numero columnas: " + mapa.columnas);
+    // Función para imprimir el mapa en consola
+    public void imprimirMapaConsola() {
+        System.out.println("Numero filas: " + mapa.filas + "  Numero columnas: " + mapa.columnas);
+        System.out.println("Posicion agente: (" + filaAgente + "," + columnaAgente + ")");
         for (int i = 0; i < mapa.filas; i++) {
-
             for (int j = 0; j < mapa.columnas; j++) {
                 if (filaAgente == i && columnaAgente == j){
                     System.out.print("A\t");
-                }
-                else if (filaMeta == i && columnaMeta == j) {
+                } else if (filaMeta == i && columnaMeta == j) {
                     System.out.print("X\t");
-                }
-                else {
+                } else {
                     System.out.print(mapa.mapa[i][j] + "\t");
                 }
             }
@@ -42,9 +36,9 @@ public class Entorno {
         }
     }
     
+    // Función para evolver todos los sensores del agente
     public ArrayList<Integer> actualizarEntornoAgente() {
         ArrayList<Integer> entorno = new ArrayList<>();
-        
         entorno.add(sensorNoroesteAgente(filaAgente, columnaAgente));
         entorno.add(sensorNorteAgente(filaAgente, columnaAgente));
         entorno.add(sensorNoresteAgente(filaAgente, columnaAgente));

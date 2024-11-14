@@ -26,14 +26,13 @@ public class MovimientoBehaviour extends Behaviour {
         //Actualiza la posición del agente 
         entorno.filaAgente = filaMovimiento;
         entorno.columnaAgente = colMovimiento;
-        agente.filAgente = filaMovimiento;
-        agente.colAgente = colMovimiento;
+        agente.moverAgente(filaMovimiento, colMovimiento);
         
-        entorno.mostrarEnTorno();      
+        entorno.imprimirMapaConsola();      
     }
     
     public boolean done() {
-        if (agente.filAgente == agente.filMeta && agente.colAgente == agente.colMeta) {
+        if (agente.filaAgente == agente.filaMeta && agente.columnaAgente == agente.columnaMeta) {
             agente.doDelete();
             return true;
         }

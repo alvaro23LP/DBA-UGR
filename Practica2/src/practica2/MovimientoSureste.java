@@ -19,40 +19,39 @@ public class MovimientoSureste implements Movimiento{
     
     @Override
     public double calculaValorMovimiento(){
-        double distanciaSureste = -1;
+        double valorSureste = -1;
         
         // Dada la pos del agente, comprueba si puede moverse al sureste
-        if (agente.see(agente.filAgente, agente.colAgente, DIRECCIONES.SURESTE)) 
-            distanciaSureste = getUtility();
-            //System.out.println("Distancia Sureste: " + distanciaSureste);
-        return distanciaSureste;
+        if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SURESTE)) 
+            valorSureste = getUtility();
+        return valorSureste;
     }
     
     @Override
     public int getFila(){
-        return agente.filAgente+1;
+        return agente.filaAgente+1;
     }
     
     @Override
     public int getColumna(){
-        return agente.colAgente+1;
+        return agente.columnaAgente+1;
     }    
 
     public double getUtility() {
-        int distancia_y = Math.abs(agente.filMeta - (agente.filAgente+1));
-        int distancia_x = Math.abs(agente.colMeta - (agente.colAgente+1));
+        int distancia_y = Math.abs(agente.filaMeta - (agente.filaAgente+1));
+        int distancia_x = Math.abs(agente.columnaMeta - (agente.columnaAgente+1));
         double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
         
         ArrayList<Integer> posicion = new ArrayList<Integer>();
-        posicion.add(agente.filAgente+1);
-        posicion.add(agente.colAgente+1);
+        posicion.add(agente.filaAgente+1);
+        posicion.add(agente.columnaAgente+1);
         
         ////Comprueba si tiene una pared diagonal
-        if ((agente.actualizarVistaAlrededor.get(6) == 0 || agente.actualizarVistaAlrededor.get(6) == -1) && agente.actualizarVistaAlrededor.get(5) == -1 && agente.actualizarVistaAlrededor.get(7) == -1 && agente.rodear2D != 2 && (agente.filMeta > agente.filAgente || agente.colMeta < agente.colAgente)){
+        if ((agente.actualizarVistaAlrededor.get(6) == 0 || agente.actualizarVistaAlrededor.get(6) == -1) && agente.actualizarVistaAlrededor.get(5) == -1 && agente.actualizarVistaAlrededor.get(7) == -1 && agente.rodear2D != 2 && (agente.filaMeta > agente.filaAgente || agente.columnaMeta < agente.columnaAgente)){
             siguiendoDiagonal = true;
             agente.rodear1D = 1;
         }
-        else if ((agente.actualizarVistaAlrededor.get(2) == 0 || agente.actualizarVistaAlrededor.get(2) == -1) && agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(3) == -1 && agente.rodear1D != 1 && (agente.filMeta < agente.filAgente || agente.colMeta > agente.colAgente)){
+        else if ((agente.actualizarVistaAlrededor.get(2) == 0 || agente.actualizarVistaAlrededor.get(2) == -1) && agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(3) == -1 && agente.rodear1D != 1 && (agente.filaMeta < agente.filaAgente || agente.columnaMeta > agente.columnaAgente)){
             siguiendoDiagonal = true;
             agente.rodear2D = 2;
         }

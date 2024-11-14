@@ -1,6 +1,8 @@
 
 package practica2;
 import jade.core.Agent;
+import practica2.GUI.MapaPanel;
+
 import java.util.ArrayList;
 
 /**
@@ -8,8 +10,11 @@ import java.util.ArrayList;
  * @author alvaro2311
  */
 public class Agente extends Agent{
+    MapaPanel mapaPanel;
 
     Entorno entorno;
+    int filaAgente, columnaAgente, filaMeta, columnaMeta;
+
     public ArrayList<ArrayList<Integer>> caminoRecorrido;
     public ArrayList<ArrayList<Integer>> noVolverAPasar;
     public ArrayList<Integer> actualizarVistaAlrededor;
@@ -17,10 +22,8 @@ public class Agente extends Agent{
     public boolean dejarDeSeguirPared = false;
     public int rodear1D = 0;
     public int rodear2D = 0;
-    int filAgente, colAgente, filMeta, colMeta;
    
     protected void setup() {
-        // Inicializar caminoRecorrido
         caminoRecorrido = new ArrayList<>();
         noVolverAPasar = new ArrayList<>();
         actualizarVistaAlrededor = new ArrayList<>();
@@ -29,35 +32,42 @@ public class Agente extends Agent{
         Object[] args = getArguments();
         if (args != null && args.length > 0) {
             entorno = (Entorno) args[0];
+            mapaPanel = (MapaPanel) args[1];
         }
 
         // Inicializar posicion del agente
-        this.filAgente = entorno.filaAgente;
-        this.colAgente = entorno.columnaAgente;
+        this.filaAgente = entorno.filaAgente;
+        this.columnaAgente = entorno.columnaAgente;
 
         // Inicializar posicion de la meta
-        this.filMeta = entorno.filaMeta;
-        this.colMeta = entorno.columnaMeta;
+        this.filaMeta = entorno.filaMeta;
+        this.columnaMeta = entorno.columnaMeta;
         
-        // Comportamientos
+        // Comportamiento
         addBehaviour(new MejorMovimientoBehaviour(entorno, this));
         addBehaviour(new MovimientoBehaviour(entorno, this));
     }
     
-    //Funcion final
+    public void moverAgente(int nuevaFila, int nuevaColumna) {
+        this.filaAgente = nuevaFila;
+        this.columnaAgente = nuevaColumna;
+        mapaPanel.actualizarPosicionAgente(nuevaFila, nuevaColumna);
+    }
+
+    // Funcion final
     public void takeDown() {
         System.out.println(" ¡¡FIN!!  El agente ha llegado al objetivo en " + caminoRecorrido.size() + " pasos");
         System.out.print("Camino recorrido: ");
         for (ArrayList<Integer> posicion : caminoRecorrido) {
             System.out.print("(" + posicion.get(0) + "," + posicion.get(1) + ") ");
         }
-        System.out.println(); // Para finalizar la línea
+        System.out.println(); 
     }
 
-    //Funcion para comprobar si el movimiento es posible
+    // Funcion para comprobar si el movimiento es posible
     public boolean see(int filaMovimiento, int columnaMovimiento, DIRECCIONES direccion) {
         boolean posible = false;
-    
+
         switch (direccion) {
             case NORTE:
                 posible = (entorno.sensorNorteAgente(filaMovimiento, columnaMovimiento) == 0);
@@ -92,10 +102,6 @@ public class Agente extends Agent{
                             || entorno.sensorOesteAgente(filaMovimiento, columnaMovimiento) == 0));
                 break;
         }
-    
         return posible;
     }
-
-    
-
 }
