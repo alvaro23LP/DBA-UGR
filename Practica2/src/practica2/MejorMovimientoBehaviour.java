@@ -146,9 +146,11 @@ public class MejorMovimientoBehaviour extends Behaviour{
         //Suroeste
         if (agente.filaAgente-1 == x && agente.columnaAgente+1 == y){
             //Suroeste muro arriba
-            if (agente.actualizarVistaAlrededor.get(1) == -1 && agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NOROESTE)) {
+            if (agente.actualizarVistaAlrededor.get(1) == -1) {
+                if(agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NOROESTE)){
                 filaMovimiento = agente.filaAgente-1;
                 colMovimiento = agente.columnaAgente-1;
+                }
             }
             //Suroeste caso contrario
             else if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SURESTE)){
@@ -163,9 +165,11 @@ public class MejorMovimientoBehaviour extends Behaviour{
         //Sureste
         if (agente.filaAgente-1 == x && agente.columnaAgente-1 == y){
             //Sureste muro arriba
-            if (agente.actualizarVistaAlrededor.get(1) == -1 && agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NORESTE)) {
+            if (agente.actualizarVistaAlrededor.get(1) == -1) {
+                if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NORESTE)){
                 filaMovimiento = agente.filaAgente-1;
                 colMovimiento = agente.columnaAgente+1;
+                }
             }
             //Sureste caso contrario
             else if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SUROESTE)){
@@ -179,9 +183,11 @@ public class MejorMovimientoBehaviour extends Behaviour{
         //Noroeste
         if (agente.filaAgente+1 == x && agente.columnaAgente+1 == y){
             //Noroeste muro derecha
-            if (agente.actualizarVistaAlrededor.get(3) == -1 && agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NORESTE)) {
+            if (agente.actualizarVistaAlrededor.get(3) == -1) {
+                if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NORESTE)){
                 filaMovimiento = agente.filaAgente-1;
                 colMovimiento = agente.columnaAgente+1;
+                }
             }
             //Noroeste caso contrario
             else if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SUROESTE)){
@@ -195,9 +201,11 @@ public class MejorMovimientoBehaviour extends Behaviour{
         //Noreste
         if (agente.filaAgente+1 == x && agente.columnaAgente-1 == y){
             //Noreste muro arriba
-            if (agente.actualizarVistaAlrededor.get(7) == -1 && agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NOROESTE)) {
+            if (agente.actualizarVistaAlrededor.get(7) == -1) {
+                if( agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NOROESTE)){
                 filaMovimiento = agente.filaAgente-1;
                 colMovimiento = agente.columnaAgente-1;
+                }
             }
             //Noreste caso contrario
             else if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SURESTE)){
@@ -223,16 +231,20 @@ public class MejorMovimientoBehaviour extends Behaviour{
         //Norte
         if (agente.filaAgente+1 == x && agente.columnaAgente == y){
             //Suroeste muro izquierda
-            if (agente.actualizarVistaAlrededor.get(7) == -1 && agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NOROESTE)) {
+            if (agente.actualizarVistaAlrededor.get(7) == -1) {
+                if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NOROESTE)){
                 filaMovimiento = agente.filaAgente-1;
                 colMovimiento = agente.columnaAgente-1;
+                }
+                else{
+                    if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NORESTE)){
+                    filaMovimiento = agente.filaAgente-1;
+                    colMovimiento = agente.columnaAgente+1;
+            } 
+                }        
             }
-            else if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NORESTE)){
-                filaMovimiento = agente.filaAgente-1;
-                colMovimiento = agente.columnaAgente+1;
-            }            
-        
             agente.dejarDeSeguirPared = false;
+        
         }
 
         //Oeste
@@ -248,27 +260,36 @@ public class MejorMovimientoBehaviour extends Behaviour{
         //Este
         if (agente.filaAgente == x && agente.columnaAgente-1 == y){
             //Noroeste muro abajo
-            if (agente.actualizarVistaAlrededor.get(5) == -1 && agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SURESTE)) {
+            if (agente.actualizarVistaAlrededor.get(5) == -1) {
+                if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SURESTE)){
                 filaMovimiento = agente.filaAgente+1;
                 colMovimiento = agente.columnaAgente+1;
+                }
+                else{
+                    if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NORESTE)){
+                        filaMovimiento = agente.filaAgente-1;
+                        colMovimiento = agente.columnaAgente+1;
+                    }
+                }
             }
-            else if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NORESTE)){
-                filaMovimiento = agente.filaAgente-1;
-                colMovimiento = agente.columnaAgente+1;
-            }
+           
             agente.dejarDeSeguirPared = false;
         }
 
         //Sur
         if (agente.filaAgente-1 == x && agente.columnaAgente == y){
             //Noreste muro derecha
-            if (agente.actualizarVistaAlrededor.get(3) == -1 && agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SURESTE)) {
+            if (agente.actualizarVistaAlrededor.get(3) == -1) {
+                if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SURESTE)){
                 filaMovimiento = agente.filaAgente+1;
                 colMovimiento = agente.columnaAgente+1;
-            }
-            else if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SUROESTE)){
-                filaMovimiento = agente.filaAgente+1;
-                colMovimiento = agente.columnaAgente-1;
+                }
+                else{
+                    if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SUROESTE)){
+                    filaMovimiento = agente.filaAgente+1;
+                    colMovimiento = agente.columnaAgente-1;
+                }
+                }
             }
             
             agente.dejarDeSeguirPared = false;
