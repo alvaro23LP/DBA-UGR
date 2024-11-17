@@ -11,6 +11,7 @@ public class MovimientoNorte implements Movimiento {
     
     private Agente agente;
     public boolean siguiendoPared = false;
+    public boolean noVolverAPasar = false;
     
     public MovimientoNorte (Agente agente){
         this.agente = agente;
@@ -41,6 +42,18 @@ public class MovimientoNorte implements Movimiento {
         int distancia_x = Math.abs(agente.columnaMeta - agente.columnaAgente);
         double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
         
+        if (agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(0) == -1 && agente.actualizarVistaAlrededor.get(7) == -1)  
+            noVolverAPasar = true;
+        else if (agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(2) == -1 && agente.actualizarVistaAlrededor.get(3) == -1)
+            noVolverAPasar = true;
+        else if (agente.actualizarVistaAlrededor.get(5) == -1 && agente.actualizarVistaAlrededor.get(6) == -1 && agente.actualizarVistaAlrededor.get(7) == -1)
+            noVolverAPasar = true;
+        else if (agente.actualizarVistaAlrededor.get(3) == -1 && agente.actualizarVistaAlrededor.get(4) == -1 && agente.actualizarVistaAlrededor.get(5) == -1)
+            noVolverAPasar = true;
+        else
+            noVolverAPasar = false;
+
+        
         //Comprueba si tiene una pared y la meta esta al otro lado
         if (agente.actualizarVistaAlrededor.get(0) == -1 && agente.actualizarVistaAlrededor.get(7) == -1 && agente.actualizarVistaAlrededor.get(6) == -1 && agente.columnaMeta < agente.columnaAgente) {    
             siguiendoPared = true;
@@ -62,6 +75,8 @@ public class MovimientoNorte implements Movimiento {
         posicion.add(agente.filaAgente-1);
         posicion.add(agente.columnaAgente);
 
+        if (noVolverAPasar)
+            agente.noVolverAPasar.add(posicion);
 
         //Comprueba si ya ha pasado por esa posicion para evitar ciclos
         for (ArrayList<Integer> pos : agente.caminoRecorrido) {

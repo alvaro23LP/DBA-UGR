@@ -11,6 +11,7 @@ public class MovimientoEste implements Movimiento{
     
     private Agente agente;
     public boolean siguiendoPared = false;
+    public boolean noVolverAPasar = false;
     
     public MovimientoEste ( Agente agente){
         this.agente = agente;
@@ -41,6 +42,17 @@ public class MovimientoEste implements Movimiento{
         int distancia_x = Math.abs(agente.columnaMeta - (agente.columnaAgente+1));
         double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
         
+        if (agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(0) == -1 && agente.actualizarVistaAlrededor.get(7) == -1)  
+            noVolverAPasar = true;
+        else if (agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(2) == -1 && agente.actualizarVistaAlrededor.get(3) == -1)
+            noVolverAPasar = true;
+        else if (agente.actualizarVistaAlrededor.get(5) == -1 && agente.actualizarVistaAlrededor.get(6) == -1 && agente.actualizarVistaAlrededor.get(7) == -1)
+            noVolverAPasar = true;
+        else if (agente.actualizarVistaAlrededor.get(3) == -1 && agente.actualizarVistaAlrededor.get(4) == -1 && agente.actualizarVistaAlrededor.get(5) == -1)
+            noVolverAPasar = true;
+        else
+            noVolverAPasar = false;
+        
         //Comprueba si tiene una pared y la meta esta al otro lado
         if (agente.actualizarVistaAlrededor.get(0) == -1 && agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(2) == -1 && agente.filaMeta < agente.filaAgente) {    
             siguiendoPared = true;
@@ -61,6 +73,9 @@ public class MovimientoEste implements Movimiento{
         ArrayList<Integer> posicion = new ArrayList<>();
         posicion.add(agente.filaAgente);
         posicion.add(agente.columnaAgente+1);
+        
+        if (noVolverAPasar)
+            agente.noVolverAPasar.add(posicion);
 
         //Comprueba si ya ha pasado por esa posicion para evitar ciclos
         for (ArrayList<Integer> pos : agente.caminoRecorrido) {
