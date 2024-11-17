@@ -1,0 +1,204 @@
+@startuml
+
+class P2 {
+    + main(String[] args): void
+}
+
+class Entorno {
+    - mapa: Mapa
+    - filaAgente: int
+    - columnaAgente: int
+    - filaMeta: int
+    - columnaMeta: int
+    + imprimirMapaConsola(): void
+    + actualizarEntornoAgente(): ArrayList<Integer>
+    + sensorNorteAgente(int, int): int
+    + sensorNoresteAgente(int, int): int
+    + sensorEsteAgente(int, int): int
+    + sensorSuresteAgente(int, int): int
+    + sensorSurAgente(int, int): int
+    + sensorSuroesteAgente(int, int): int
+    + sensorOesteAgente(int, int): int
+    + sensorNoroesteAgente(int, int): int
+}
+
+class Agente {
+    - mapaPanel: MapaPanel
+    - entorno: Entorno
+    - filaAgente: int
+    - columnaAgente: int
+    - filaMeta: int
+    - columnaMeta: int
+    - caminoRecorrido: ArrayList<ArrayList<Integer>>
+    - noVolverAPasar: ArrayList<ArrayList<Integer>>
+    - actualizarVistaAlrededor: ArrayList<Integer>
+    - dejarDeSeguirDiagonal: boolean
+    - dejarDeSeguirPared: boolean
+    - rodear1D: int
+    - rodear2D: int
+    + setup(): void
+    + moverAgente(int, int): void
+    + takeDown(): void
+    + see(int, int, DIRECCIONES): boolean
+}
+
+class Movimiento {
+    + calculaValorMovimiento(): double
+    + getFila(): int
+    + getColumna(): int
+}
+
+class MovimientoNoreste extends Movimiento {
+    - agente: Agente
+    - siguiendoDiagonal: boolean
+    + MovimientoNoreste(Agente)
+    + calculaValorMovimiento(): double
+    + getFila(): int
+    + getColumna(): int
+    + getUtility(): double
+}
+
+class MovimientoNoroeste extends Movimiento {
+    - agente: Agente
+    - siguiendoDiagonal: boolean
+    + MovimientoNoroeste(Agente)
+    + calculaValorMovimiento(): double
+    + getFila(): int
+    + getColumna(): int
+    + getUtility(): double
+}
+
+class MovimientoSureste extends Movimiento {
+    - agente: Agente
+    - siguiendoDiagonal: boolean
+    + MovimientoSureste(Agente)
+    + calculaValorMovimiento(): double
+    + getFila(): int
+    + getColumna(): int
+    + getUtility(): double
+}
+
+class MovimientoSuroeste extends Movimiento {
+    - agente: Agente
+    - siguiendoDiagonal: boolean
+    + MovimientoSuroeste(Agente)
+    + calculaValorMovimiento(): double
+    + getFila(): int
+    + getColumna(): int
+    + getUtility(): double
+}
+
+class MovimientoNorte extends Movimiento {
+    - agente: Agente
+    - siguiendoPared: boolean
+    + MovimientoNorte(Agente)
+    + calculaValorMovimiento(): double
+    + getFila(): int
+    + getColumna(): int
+    + getUtility(): double
+}
+
+class MovimientoSur extends Movimiento {
+    - agente: Agente
+    - siguiendoPared: boolean
+    + MovimientoSur(Agente)
+    + calculaValorMovimiento(): double
+    + getFila(): int
+    + getColumna(): int
+    + getUtility(): double
+}
+
+class MovimientoEste extends Movimiento {
+    - agente: Agente
+    - siguiendoPared: boolean
+    + MovimientoEste(Agente)
+    + calculaValorMovimiento(): double
+    + getFila(): int
+    + getColumna(): int
+    + getUtility(): double
+}
+
+class MovimientoOeste extends Movimiento {
+    - agente: Agente
+    - siguiendoPared: boolean
+    + MovimientoOeste(Agente)
+    + calculaValorMovimiento(): double
+    + getFila(): int
+    + getColumna(): int
+    + getUtility(): double
+}
+
+class MovimientoBehaviour extends Behaviour {
+    - entorno: Entorno
+    - filaMovimiento: int
+    - colMovimiento: int
+    - agente: Agente
+    + MovimientoBehaviour(Entorno, Agente)
+    + action(): void
+    + done(): boolean
+}
+
+class MejorMovimientoBehaviour extends Behaviour {
+    - entorno: Entorno
+    - mejorDistancia: double
+    - filaMovimiento: int
+    - colMovimiento: int
+    - agente: Agente
+    - movNorte: MovimientoNorte
+    - movSur: MovimientoSur
+    - movEste: MovimientoEste
+    - movOeste: MovimientoOeste
+    - movNoreste: MovimientoNoreste
+    - movNoroeste: MovimientoNoroeste
+    - movSureste: MovimientoSureste
+    - movSuroeste: MovimientoSuroeste
+    + MejorMovimientoBehaviour(Entorno, Agente)
+    + action(): void
+    + done(): boolean
+}
+
+class MapaPanel extends JPanel {
+    - mapa: Mapa
+    - filaAngente: int
+    - columnaAgente: int
+    - filaMeta: int
+    - columnaMeta: int
+    - pacmanImagen: BufferedImage
+    - cerezaImagen: BufferedImage
+    - fantasmas: BufferedImage[]
+    - random: Random
+    - caminoRecorrido: ArrayList<Point>
+    - puntoInicial: Point
+    + MapaPanel(Mapa, int, int, int, int)
+    + actualizarPosicionAgente(int, int): void
+    + paintComponent(Graphics): void
+}
+
+enum DIRECCIONES {
+    NORTE,
+    NORESTE,
+    ESTE,
+    SURESTE,
+    SUR,
+    SUROESTE,
+    OESTE,
+    NOROESTE
+}
+
+P2 --> Entorno
+P2 --> MapaPanel
+P2 --> Agente
+Agente --> Entorno
+Agente --> MapaPanel
+Agente --> MejorMovimientoBehaviour
+Agente --> MovimientoBehaviour
+MejorMovimientoBehaviour --> MovimientoNorte
+MejorMovimientoBehaviour --> MovimientoSur
+MejorMovimientoBehaviour --> MovimientoEste
+MejorMovimientoBehaviour --> MovimientoOeste
+MejorMovimientoBehaviour --> MovimientoNoreste
+MejorMovimientoBehaviour --> MovimientoNoroeste
+MejorMovimientoBehaviour --> MovimientoSureste
+MejorMovimientoBehaviour --> MovimientoSuroeste
+
+@enduml
