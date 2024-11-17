@@ -236,12 +236,12 @@ public class MejorMovimientoBehaviour extends Behaviour{
                 filaMovimiento = agente.filaAgente-1;
                 colMovimiento = agente.columnaAgente-1;
                 }
-                else{
+            }      
+            else{
                     if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NORESTE)){
                     filaMovimiento = agente.filaAgente-1;
                     colMovimiento = agente.columnaAgente+1;
             } 
-                }        
             }
             agente.dejarDeSeguirPared = false;
         
@@ -265,13 +265,14 @@ public class MejorMovimientoBehaviour extends Behaviour{
                 filaMovimiento = agente.filaAgente+1;
                 colMovimiento = agente.columnaAgente+1;
                 }
-                else{
+                
+            }
+            else{
                     if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.NORESTE)){
                         filaMovimiento = agente.filaAgente-1;
                         colMovimiento = agente.columnaAgente+1;
                     }
                 }
-            }
            
             agente.dejarDeSeguirPared = false;
         }
@@ -284,11 +285,11 @@ public class MejorMovimientoBehaviour extends Behaviour{
                 filaMovimiento = agente.filaAgente+1;
                 colMovimiento = agente.columnaAgente+1;
                 }
-                else{
+                }
+            else{
                     if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SUROESTE)){
                     filaMovimiento = agente.filaAgente+1;
                     colMovimiento = agente.columnaAgente-1;
-                }
                 }
             }
             

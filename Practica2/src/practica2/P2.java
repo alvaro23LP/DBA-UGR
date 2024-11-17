@@ -26,14 +26,14 @@ public class P2 {
         mapa = new Mapa();
         //String ruta = "./mapas/mapWithDiagonalWall.txt";
         //String ruta = "./mapas/mapWithComplexObstacle1.txt";
-        //String ruta = "./mapas/mapWithHorizontalWall.txt";
+        //String ruta = "./mapas2/mapWithHorizontalWall.txt";
 
         //String ruta = "./mapas/mapComplejo3.txt";
-        String ruta = "./mapas/mapWithComplexObstacle3.txt";
+        String ruta = "./mapas/mapComplejo4.txt";
         
         mapa.readMap(ruta);
     
-        entorno = new Entorno(mapa,5,6,3,3);
+        entorno = new Entorno(mapa,0,0,9,9);
     
         entorno.imprimirMapaConsola();
 
