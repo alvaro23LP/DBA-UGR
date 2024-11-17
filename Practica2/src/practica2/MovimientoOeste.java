@@ -44,11 +44,7 @@ public class MovimientoOeste implements Movimiento{
         
         if (agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(0) == -1 && agente.actualizarVistaAlrededor.get(7) == -1)  
             noVolverAPasar = true;
-        else if (agente.actualizarVistaAlrededor.get(1) == -1 && agente.actualizarVistaAlrededor.get(2) == -1 && agente.actualizarVistaAlrededor.get(3) == -1)
-            noVolverAPasar = true;
         else if (agente.actualizarVistaAlrededor.get(5) == -1 && agente.actualizarVistaAlrededor.get(6) == -1 && agente.actualizarVistaAlrededor.get(7) == -1)
-            noVolverAPasar = true;
-        else if (agente.actualizarVistaAlrededor.get(3) == -1 && agente.actualizarVistaAlrededor.get(4) == -1 && agente.actualizarVistaAlrededor.get(5) == -1)
             noVolverAPasar = true;
         else
             noVolverAPasar = false;

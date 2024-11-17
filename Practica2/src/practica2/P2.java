@@ -33,7 +33,7 @@ public class P2 {
         
         mapa.readMap(ruta);
     
-        entorno = new Entorno(mapa,0,0,9,9);
+        entorno = new Entorno(mapa,10,5,6,5);
     
         entorno.imprimirMapaConsola();
 

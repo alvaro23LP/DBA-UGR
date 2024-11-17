@@ -17,6 +17,7 @@ public class Agente extends Agent{
 
     public ArrayList<ArrayList<Integer>> caminoRecorrido;
     public ArrayList<ArrayList<Integer>> noVolverAPasar;
+    public ArrayList<Integer> pos_inicial;
     public ArrayList<Integer> actualizarVistaAlrededor;
     public boolean dejarDeSeguirDiagonal = false;
     public boolean dejarDeSeguirPared = false;
@@ -27,6 +28,7 @@ public class Agente extends Agent{
         caminoRecorrido = new ArrayList<>();
         noVolverAPasar = new ArrayList<>();
         actualizarVistaAlrededor = new ArrayList<>();
+        pos_inicial = new ArrayList<>();
 
         // Obtener los argumentos
         Object[] args = getArguments();
@@ -38,6 +40,10 @@ public class Agente extends Agent{
         // Inicializar posicion del agente
         this.filaAgente = entorno.filaAgente;
         this.columnaAgente = entorno.columnaAgente;
+        
+        pos_inicial.add(this.filaAgente);
+        pos_inicial.add(this.columnaAgente);
+        caminoRecorrido.add(pos_inicial);
 
         // Inicializar posicion de la meta
         this.filaMeta = entorno.filaMeta;
