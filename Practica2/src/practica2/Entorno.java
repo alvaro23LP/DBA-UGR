@@ -39,6 +39,7 @@ public class Entorno {
     // Función para evolver todos los sensores del agente
     public ArrayList<Integer> actualizarEntornoAgente() {
         ArrayList<Integer> entorno = new ArrayList<>();
+        
         entorno.add(sensorNoroesteAgente(filaAgente, columnaAgente));
         entorno.add(sensorNorteAgente(filaAgente, columnaAgente));
         entorno.add(sensorNoresteAgente(filaAgente, columnaAgente));

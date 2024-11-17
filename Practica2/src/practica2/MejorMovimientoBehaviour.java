@@ -260,11 +260,15 @@ public class MejorMovimientoBehaviour extends Behaviour{
         }
 
         //Sur
-        if (agente.filaAgente-1 == x && agente.columnaAgente == y && agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SURESTE)){
+        if (agente.filaAgente-1 == x && agente.columnaAgente == y){
             //Noreste muro derecha
-            if (agente.actualizarVistaAlrededor.get(3) == -1) {
+            if (agente.actualizarVistaAlrededor.get(3) == -1 && agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SURESTE)) {
                 filaMovimiento = agente.filaAgente+1;
                 colMovimiento = agente.columnaAgente+1;
+            }
+            else if (agente.see(agente.filaAgente, agente.columnaAgente, DIRECCIONES.SUROESTE)){
+                filaMovimiento = agente.filaAgente+1;
+                colMovimiento = agente.columnaAgente-1;
             }
             
             agente.dejarDeSeguirPared = false;
