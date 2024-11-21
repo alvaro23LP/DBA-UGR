@@ -24,17 +24,35 @@ public class P2 {
         
         //////////////// ENTORNO /////////////////
         mapa = new Mapa();
-        //String ruta = "./mapas/mapWithDiagonalWall.txt";
-        //String ruta = "./mapas/mapWithComplexObstacle1.txt";
-        //String ruta = "./mapas2/mapWithHorizontalWall.txt";
+        String ruta = "./mapas/mapWithoutObstacle.txt";
+        entorno = new Entorno(mapa,9,9,0,0);
 
-        //String ruta = "./mapas/mapComplejo3.txt";
-        String ruta = "./mapas/mapComplejo4.txt";
+        /* String ruta = "./mapas/mapWithVerticalWall.txt";
+        entorno = new Entorno(mapa,9,9,7,3); */
+
+        /* String ruta = "./mapas/mapWithHorizontalWall.txt";
+        entorno = new Entorno(mapa,9,5,3,5); */
+
+        /* String ruta = "./mapas/mapWithDiagonalWall.txt";
+        entorno = new Entorno(mapa,9,9,0,9); */
+
+        /* String ruta = "./mapas/mapWithComplexObstacle1.txt";
+        entorno = new Entorno(mapa,9,6,5,6); */
+
+
+        /* String ruta = "./mapas/mapWithComplexObstacle2.txt";
+        entorno = new Entorno(mapa,9,6,3,6); */
+        
+        /* String ruta = "./mapas/mapWithComplexObstacle3.txt";
+        entorno = new Entorno(mapa,6,6,9,4); */
+
+        /* String ruta = "./mapas/mapComplex.txt";
+        entorno = new Entorno(mapa,29,14,15,14);
+ */
         
         mapa.readMap(ruta);
     
-        entorno = new Entorno(mapa,10,5,6,5);
-    
+        //entorno = new Entorno(mapa,9,9,0,0);
         entorno.imprimirMapaConsola();
 
         ////////// INTERFAZ GRAFICA ////////////

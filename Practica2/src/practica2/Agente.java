@@ -62,7 +62,7 @@ public class Agente extends Agent{
 
     // Funcion final
     public void takeDown() {
-        System.out.println(" ¡¡FIN!!  El agente ha llegado al objetivo en " + caminoRecorrido.size() + " pasos");
+        System.out.println(" ¡¡FIN!!  El agente ha llegado al objetivo en " + (caminoRecorrido.size()-1) + " pasos");
         System.out.print("Camino recorrido: ");
         for (ArrayList<Integer> posicion : caminoRecorrido) {
             System.out.print("(" + posicion.get(0) + "," + posicion.get(1) + ") ");
