@@ -11,6 +11,20 @@ public class Elfo extends Agent {
         addBehaviour(new Msg_Elfo_Santa());        
     }
 
+    public String traducirABoomer (String mensaje){
+        String primeraParteAEliminar = "Bro, ";
+        String segundaParteAEliminar = ", en plan...";
+        String mensajeLimpio = mensaje.replace(primeraParteAEliminar, "");
+        mensajeLimpio = mensajeLimpio.replace(segundaParteAEliminar, "");
+        
+        return "Joulupukki " + mensajeLimpio + " Kiitos";
+    }
+
+    public String transformarAMensajeGenZ (String  mensaje) {
+
+        return "Bro, " + mensaje + ", en plan...";
+    }
+
     @Override
     public void takeDown() {
         System.out.println("Agente Elfo finalizado");

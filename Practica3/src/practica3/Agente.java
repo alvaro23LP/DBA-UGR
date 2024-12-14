@@ -61,6 +61,10 @@ public class Agente extends Agent{
         addBehaviour(new Msg_Agente_Rudolph());
         addBehaviour(new Msg_Agente_Elfo());
     }
+
+    public String transformarAMensajeGenZ (String  mensaje) {
+        return "Bro, " + mensaje + ", en plan...";
+    }
     
     public void moverAgente(int nuevaFila, int nuevaColumna) {
         this.filaAgente = nuevaFila;
