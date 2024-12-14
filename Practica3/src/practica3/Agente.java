@@ -23,12 +23,17 @@ public class Agente extends Agent{
     public boolean dejarDeSeguirPared = false;
     public int rodear1D = 0;
     public int rodear2D = 0;
+
+    public String codigoCanalRudolph;
+    public boolean finBusqueda;
    
     protected void setup() {
         caminoRecorrido = new ArrayList<>();
         noVolverAPasar = new ArrayList<>();
         actualizarVistaAlrededor = new ArrayList<>();
         pos_inicial = new ArrayList<>();
+        finBusqueda = false;
+        codigoCanalRudolph = "";
 
         // Obtener los argumentos
         Object[] args = getArguments();
@@ -52,6 +57,9 @@ public class Agente extends Agent{
         // Comportamiento
         addBehaviour(new MejorMovimientoBehaviour(entorno, this));
         addBehaviour(new MovimientoBehaviour(entorno, this));
+        addBehaviour(new Msg_Agente_Santa());
+        addBehaviour(new Msg_Agente_Rudolph());
+        addBehaviour(new Msg_Agente_Elfo());
     }
     
     public void moverAgente(int nuevaFila, int nuevaColumna) {
@@ -63,10 +71,11 @@ public class Agente extends Agent{
     // Funcion final
     public void takeDown() {
         System.out.println(" ¡¡FIN!!  El agente ha llegado al objetivo en " + (caminoRecorrido.size()-1) + " pasos");
-        System.out.print("Camino recorrido: ");
-        for (ArrayList<Integer> posicion : caminoRecorrido) {
-            System.out.print("(" + posicion.get(0) + "," + posicion.get(1) + ") ");
-        }
+        System.out.println("Agente finalizado");
+        // System.out.print("Camino recorrido: ");
+        // for (ArrayList<Integer> posicion : caminoRecorrido) {
+        //     System.out.print("(" + posicion.get(0) + "," + posicion.get(1) + ") ");
+        // }
         System.out.println(); 
     }
 

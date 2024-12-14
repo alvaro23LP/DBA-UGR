@@ -1,26 +1,38 @@
 package practica3;
 
 import jade.core.Agent;
-import java.util.ArrayList;
 
+public class Rudolph extends Agent {
+    public int[][] coordenadasRenos = new int[8][2];
+    public String codigoCanal;
 
-public class Rudolph extends Agent{
-    // private ArrayList<int[]> listaRenos = new ArrayList<>();
+    @Override
+    protected void setup() {
+        coordenadasRenos[0][0] = 5;
+        coordenadasRenos[0][1] = 2;
+        coordenadasRenos[1][0] = 11;
+        coordenadasRenos[1][1] = 12;
+        coordenadasRenos[2][0] = 8;
+        coordenadasRenos[2][1] = 1;
+        coordenadasRenos[3][0] = 20;
+        coordenadasRenos[3][1] = 5;
+        coordenadasRenos[4][0] = 23;
+        coordenadasRenos[4][1] = 18;
+        coordenadasRenos[5][0] = 27;
+        coordenadasRenos[5][1] = 15;
+        coordenadasRenos[6][0] = 3;
+        coordenadasRenos[6][1] = 26;
+        coordenadasRenos[7][0] = 9;
+        coordenadasRenos[7][1] = 0;
 
-    
-    // @Override
-    // protected void setup() {
-        
-    //     listaRenos.add(new int[]{2,2});
-    //     listaRenos.add(new int[]{10,15});
-    //     listaRenos.add(new int[]{5,6});
-    //     listaRenos.add(new int[]{13,12});
-    //     listaRenos.add(new int[]{35,21});
-    //     listaRenos.add(new int[]{32,10});
-    //     listaRenos.add(new int[]{26,21});
-    //     listaRenos.add(new int[]{12,25});
-        
-    //      addBehaviour(new MensajeRudolph(listaRenos));
-        
-    // }
+        codigoCanal = "CanalSecreto-53246";
+
+        addBehaviour(new Msg_Rudolph_Agente());
+    }
+
+    @Override
+    public void takeDown() {
+        System.out.println("Agente Rudolph finalizado");
+        System.out.println();
+    }
 }

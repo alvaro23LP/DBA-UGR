@@ -5,14 +5,13 @@ import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 
 public class Msg_Agente_Elfo extends Behaviour {
+
     @Override
     public void action() {
         // TODO Auto-generated method stub
-        
     }
-    
-    
-    
+
+    @Override
     public boolean done() {
         return false;
     }

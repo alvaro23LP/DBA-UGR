@@ -21,7 +21,7 @@ public class P3 {
 
         //////////////// ENTORNO /////////////////
         mapa = new Mapa();
-        String ruta = "./mapas/100x100-conObstaculos.txt";
+        String ruta = "./mapas/100x100-sinObstaculos.txt";
         entorno = new Entorno(mapa,0,0,0,0);
 
         mapa.readMap(ruta);
@@ -65,6 +65,7 @@ public class P3 {
 
             // Creamos un nuevo agente y le pasamos el entorno e interfaz como argumento
             Object[] agentArgs = new Object[] { entorno, mapaPanel };
+            
             AgentController ac0 = cc.createNewAgent(agentName, Agente.class.getCanonicalName(), agentArgs);
             AgentController ac1 = cc.createNewAgent(santaName, Santa.class.getCanonicalName(), null);
             AgentController ac2 = cc.createNewAgent(rudolphName, Rudolph.class.getCanonicalName(), null);
