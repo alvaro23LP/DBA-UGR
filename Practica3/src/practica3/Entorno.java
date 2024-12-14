@@ -17,6 +17,11 @@ public class Entorno {
         this.filaMeta = filaMeta;
         this.columnaMeta = columnaMeta;
     }
+
+    public void setCoordenadasDestino(int filaMeta, int columnaMeta){
+        this.filaMeta = filaMeta;
+        this.columnaMeta = columnaMeta;
+    }
     
     // Función para imprimir el mapa en consola
     public void imprimirMapaConsola() {

@@ -7,7 +7,7 @@ import jade.lang.acl.ACLMessage;
 import static jade.lang.acl.ACLParserConstants.CONVERSATION_ID;
 import java.util.Random;
 
-public class recibirMensajeAgenteBehaviour extends Behaviour {
+public class Msg_Santa_Agente extends Behaviour {
     
     @Override
     public void action() {

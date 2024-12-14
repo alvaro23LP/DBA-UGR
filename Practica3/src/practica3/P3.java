@@ -22,7 +22,7 @@ public class P3 {
         //////////////// ENTORNO /////////////////
         mapa = new Mapa();
         String ruta = "./mapas/100x100-conObstaculos.txt";
-        entorno = new Entorno(mapa,0,0,50,50);
+        entorno = new Entorno(mapa,0,0,0,0);
 
         mapa.readMap(ruta);
 
@@ -30,7 +30,7 @@ public class P3 {
         entorno.imprimirMapaConsola();
 
         ////////// INTERFAZ GRAFICA ////////////
-        JFrame frame = new JFrame("Practica 2 - Movimiento de un agente en un mundo bidimensional");
+        JFrame frame = new JFrame("Practica 3 - Comunicación de agentes");
         MapaPanel mapaPanel = new MapaPanel(mapa, entorno.filaAgente, entorno.columnaAgente, entorno.filaMeta, entorno.columnaMeta);
         frame.add(mapaPanel);
 
@@ -46,8 +46,12 @@ public class P3 {
 
         //////////////// AGENTE ////////////////
         String host = "localhost";
-        String containerName = "container-P2";
-        String agentName = "alvarolv";
+        String containerName = "container-P3";
+
+        String agentName = "agente";
+        String santaName = "santa";
+        String rudolphName = "rudolph";
+        String elfName = "elfo";
 
         try {
             jade.core.Runtime rt = jade.core.Runtime.instance();
@@ -61,8 +65,16 @@ public class P3 {
 
             // Creamos un nuevo agente y le pasamos el entorno e interfaz como argumento
             Object[] agentArgs = new Object[] { entorno, mapaPanel };
-            AgentController ac = cc.createNewAgent(agentName, Agente.class.getCanonicalName(), agentArgs);
-            ac.start();
+            AgentController ac0 = cc.createNewAgent(agentName, Agente.class.getCanonicalName(), agentArgs);
+            AgentController ac1 = cc.createNewAgent(santaName, Santa.class.getCanonicalName(), null);
+            AgentController ac2 = cc.createNewAgent(rudolphName, Rudolph.class.getCanonicalName(), null);
+            AgentController ac3 = cc.createNewAgent(elfName, Elfo.class.getCanonicalName(), null);
+            
+            
+            ac0.start();
+            ac1.start();
+            ac2.start();
+            ac3.start();
 
         } catch (StaleProxyException e) {
             e.printStackTrace();

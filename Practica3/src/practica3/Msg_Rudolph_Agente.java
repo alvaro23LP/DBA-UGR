@@ -6,7 +6,7 @@ import jade.lang.acl.ACLMessage;
 import java.util.ArrayList;
 
 
-public class MensajeRudolph extends Behaviour {
+public class Msg_Rudolph_Agente extends Behaviour {
     
     @Override
     public void action() {
