@@ -23,7 +23,7 @@ public class Msg_Santa_Agente extends Behaviour {
 
                         // Numero aleatorio del 0 al 10, si es mayor a 8, Santa acepta la propuesta, si no la rechaza
                         if (Math.random() * 10 > 8) {
-                            ((Santa) myAgent).mensajeParaTraducirParaAgente = ((Santa) myAgent).transformarAMensajeBoomer("Santa acepta tu propuesta por ser un niño bueno");
+                            ((Santa) myAgent).mensajeParaTraducirParaAgente = ((Santa) myAgent).transformarAMensajeBoomer("Santa acepta tu propuesta por ser un niño bueno, aqui tienes el código:" + ((Santa) myAgent).codigoCanal);
                             aceptarMision = true;
                         } else {
                             ((Santa) myAgent).mensajeParaTraducirParaAgente = ((Santa) myAgent).transformarAMensajeBoomer("Santa cree que eres un niño malo, no quiero tu ayuda en la misión");

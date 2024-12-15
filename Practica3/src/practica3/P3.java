@@ -22,7 +22,7 @@ public class P3 {
         //////////////// ENTORNO /////////////////
         mapa = new Mapa();
         String ruta = "./mapas/100x100-sinObstaculos.txt";
-        entorno = new Entorno(mapa,0,0,0,0);
+        entorno = new Entorno(mapa,0,0,-1,-1); // al principio las coordenadas de destino no se conocen
 
         mapa.readMap(ruta);
 

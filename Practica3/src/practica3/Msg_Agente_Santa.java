@@ -31,9 +31,11 @@ public class Msg_Agente_Santa extends Behaviour {
                     if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Santa.name()) && msg.getPerformative() == ACLMessage.ACCEPT_PROPOSAL){
                         System.out.println("Santa aceptó la propuesta");
                         msgAnterior = msg;
+                        // Dividir el mensaje recibido en dos. EL separador es : y nos quedaremos con la segunda parte
+                        ((Agente) myAgent).codigoCanalRudolph = msg.getContent().split(":")[1];
 
                         step = 2;
-                        
+
                         ((Agente) myAgent).conversandoConSanta = false;
                         ((Agente) myAgent).conversandoConRudolph = true;
 
