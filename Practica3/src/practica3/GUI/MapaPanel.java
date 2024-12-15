@@ -35,7 +35,7 @@ public class MapaPanel extends JPanel {
         //Cargar las imágenes
         try {
             pacmanImagen = ImageIO.read(new File("src/practica3/GUI/images/pacman2.png"));
-            cerezaImagen = ImageIO.read(new File("src/practica3/GUI/images/cerezas.png"));
+            cerezaImagen = ImageIO.read(new File("src/practica3/GUI/images/reno.png"));
             fantasmas[0] = ImageIO.read(new File("src/practica3/GUI/images/fantasma_rojo.png"));
             fantasmas[1] = ImageIO.read(new File("src/practica3/GUI/images/fantasma_azul.png"));
             fantasmas[2] = ImageIO.read(new File("src/practica3/GUI/images/fantasma_rosa.png"));
@@ -50,6 +50,20 @@ public class MapaPanel extends JPanel {
         // Actualizar la posición del agente
         this.filaAngente = nuevaFilAgente;
         this.columnaAgente = nuevaColAgente;
+        repaint();
+    }
+
+    //tipo 0: la meta es un reno, tipo 1: la meta es Santa
+    public void actualizarDestinoUI(int filaMeta, int columnaMeta, int tipo) {
+        this.filaMeta = filaMeta;
+        this.columnaMeta = columnaMeta;
+        if (tipo == 1) {
+            try{
+                cerezaImagen = ImageIO.read(new File("src/practica3/GUI/images/santa.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         repaint();
     }
 

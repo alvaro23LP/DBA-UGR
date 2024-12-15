@@ -24,7 +24,7 @@ public class Msg_Agente_Santa extends Behaviour {
 
                     step = 1;
                 }
-                // Recibir respuesta de Santa
+                // Recibir respuesta de Santa con el codigo del canal en caso de que acepte la propuesta
                 case 1 -> {
                     ACLMessage msg = myAgent.blockingReceive();
                     System.out.println(msg);
@@ -47,6 +47,16 @@ public class Msg_Agente_Santa extends Behaviour {
                         System.out.println("Error en el protocolo de comunicación - paso 1");
                         myAgent.doDelete();
                     }
+                }
+                // Envio de mensaje traducido a Santa informando de que se ha encontrado un reno
+                case 2 -> {
+                    ACLMessage msg = msgAnterior.createReply(ACLMessage.INFORM);
+                    msg.setContent(((Agente) myAgent).mensajeTraducidoParaSanta);
+                    myAgent.send(msg);
+
+                    step = 2;
+                    ((Agente) myAgent).conversandoConSanta = false;
+                    ((Agente) myAgent).conversandoConRudolph = true;
                 }
             }
         }

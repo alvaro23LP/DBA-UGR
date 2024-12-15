@@ -20,6 +20,9 @@ public class MovimientoBehaviour extends Behaviour {
     }
     
     public void action() {
+        if (!agente.buscandoRenos && !agente.buscandoSanta) {
+            return;
+        }
         filaMovimiento = (!agente.caminoRecorrido.isEmpty()) ? agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1).get(0) : -1;
         colMovimiento = (!agente.caminoRecorrido.isEmpty()) ? agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1).get(1) : -1;
         
@@ -28,13 +31,18 @@ public class MovimientoBehaviour extends Behaviour {
         entorno.columnaAgente = colMovimiento;
         agente.moverAgente(filaMovimiento, colMovimiento);
         
-        entorno.imprimirMapaConsola();      
+        //entorno.imprimirMapaConsola();      
     }
     
     public boolean done() {
         if (agente.filaAgente == agente.filaMeta && agente.columnaAgente == agente.columnaMeta) {
-            agente.doDelete();
-            return true;
+            agente.conversandoConElfo = true;
+            if (agente.buscandoSanta){
+                //agente.doDelete();
+                return true;
+            }else{
+                return false;
+            }
         }
         else
             return false;

@@ -17,14 +17,14 @@ public class Msg_Rudolph_Agente extends Behaviour {
             // Comprobar si el código es correcto
             case 0 -> {
                 ACLMessage msg = myAgent.blockingReceive();
-                if (msg.getConversationId().equals(((Rudolph) myAgent).codigoCanal) && msg.getPerformative() == ACLMessage.REQUEST && msg.getSender().toString().equals("Agente")) {
+                if (msg.getConversationId().equals(((Rudolph) myAgent).codigoCanal) && msg.getPerformative() == ACLMessage.REQUEST && msg.getSender().getLocalName().equals("Agente")) {
                     System.out.println(msg);
                     ACLMessage reply = msg.createReply(ACLMessage.AGREE);
                     reply.setContent("Veo que el codigo es correcto, puedes ayudarme en la misión");
                     myAgent.send(reply);
 
                     step = 1;
-                } else if (!msg.getConversationId().equals(((Rudolph) myAgent).codigoCanal) && msg.getPerformative() == ACLMessage.REQUEST && msg.getSender().toString().equals("Agente")) {
+                } else if (!msg.getConversationId().equals(((Rudolph) myAgent).codigoCanal) && msg.getPerformative() == ACLMessage.REQUEST && msg.getSender().getLocalName().equals("Agente")) {
                     System.out.println(msg);
                     ACLMessage reply = msg.createReply(ACLMessage.REFUSE);
                     reply.setContent("Veo que tratas de engañarme, el código que me has mandado no es el correcto");
@@ -37,7 +37,7 @@ public class Msg_Rudolph_Agente extends Behaviour {
             // Esperar a que el agente pida coordenadas de un reno
             case 1 -> {
                 ACLMessage msg = myAgent.blockingReceive();
-                if (msg.getConversationId().equals(((Rudolph) myAgent).codigoCanal) && msg.getPerformative() == ACLMessage.REQUEST && msg.getSender().toString().equals("Agente")) {
+                if (msg.getConversationId().equals(((Rudolph) myAgent).codigoCanal) && msg.getPerformative() == ACLMessage.REQUEST && msg.getSender().getLocalName().equals("Agente")) {
                     // cada vez que le digamos la posicion de un reno, incrementamos el contador de renos en 1, cuando llegue a 8, le comunicamos que no hay más renos perdidos
                     System.out.println(msg);
                     ACLMessage reply = msg.createReply(ACLMessage.INFORM);

@@ -26,7 +26,7 @@ public class Elfo extends Agent {
         String mensajeLimpio = mensaje.replace(primeraParteAEliminar, "");
         mensajeLimpio = mensajeLimpio.replace(segundaParteAEliminar, "");
 
-        return "Bro, " + mensaje + ", en plan...";
+        return "Bro, " + mensajeLimpio + ", en plan...";
     }
 
     @Override

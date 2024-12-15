@@ -14,15 +14,15 @@ public class Msg_Elfo_Santa extends Behaviour {
             // Enviar el menaje a Santa traducido a GenZ (para que el agente lo entienda)
             case 0 -> {
                 ACLMessage msg = myAgent.blockingReceive();
-                if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Santa_Elfo.name()) && msg.getPerformative() == ACLMessage.REQUEST && msg.getSender().toString().equals("Santa")){
+                if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Santa_Elfo.name()) && msg.getPerformative() == ACLMessage.REQUEST && msg.getSender().getLocalName().equals("Santa")){
                     System.out.println(msg);
                     ACLMessage reply = msg.createReply(ACLMessage.INFORM);
                     reply.setContent(((Elfo) myAgent).traducirAGenZ(msg.getContent()));
                     myAgent.send(reply);
 
                 } else {
-                    System.out.println("Error en el protocolo de comunicación - paso 0");
-                    myAgent.doDelete();
+                    // System.out.println("Error en el protocolo de comunicación - paso 0");
+                    // myAgent.doDelete();
                 }
             }
         }

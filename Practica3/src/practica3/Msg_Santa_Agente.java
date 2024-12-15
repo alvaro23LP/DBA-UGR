@@ -17,13 +17,13 @@ public class Msg_Santa_Agente extends Behaviour {
                 // Recibir mensaje del agente que se ofrece voluntario
                 case 0 -> {
                     ACLMessage msg = myAgent.blockingReceive();
-                    if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Santa.name()) && msg.getPerformative() == ACLMessage.PROPOSE && msg.getSender().toString().equals("Agente")) {
+                    if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Santa.name()) && msg.getPerformative() == ACLMessage.PROPOSE && msg.getSender().getLocalName().equals("Agente")) {
                         System.out.println(msg);
                         msgAnterior = msg;
 
-                        // Numero aleatorio del 0 al 10, si es mayor a 8, Santa acepta la propuesta, si no la rechaza
-                        if (Math.random() * 10 > 8) {
-                            ((Santa) myAgent).mensajeParaTraducirParaAgente = ((Santa) myAgent).transformarAMensajeBoomer("Santa acepta tu propuesta por ser un niño bueno, aqui tienes el código:" + ((Santa) myAgent).codigoCanal);
+                        // Numero aleatorio del 0 al 10, si es mayor a 2, Santa acepta la propuesta, si no la rechaza
+                        if (Math.random() * 10 > 2) {
+                            ((Santa) myAgent).mensajeParaTraducirParaAgente = ((Santa) myAgent).transformarAMensajeBoomer("Santa acepta tu propuesta por ser un niño bueno, aqui tienes el código:" + ((Santa) myAgent).codigoCanal + ":");
                             aceptarMision = true;
                         } else {
                             ((Santa) myAgent).mensajeParaTraducirParaAgente = ((Santa) myAgent).transformarAMensajeBoomer("Santa cree que eres un niño malo, no quiero tu ayuda en la misión");
@@ -56,9 +56,10 @@ public class Msg_Santa_Agente extends Behaviour {
                 case 2 -> {
                     // El agente le va informando cada vez que se encuentra un reno, mientras recibe los mensajes inform, santa incrementa su contador hasta llegar a 8, momento en el que pasa al siguiente paso
                     ACLMessage msg = myAgent.blockingReceive();
-                    if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Santa.name()) && msg.getPerformative() == ACLMessage.INFORM && msg.getSender().toString().equals("Agente")) {
+                    if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Santa.name()) && msg.getPerformative() == ACLMessage.INFORM && msg.getSender().getLocalName().equals("Agente")) {
                         System.out.println(msg);
                         ((Santa) myAgent).numeroRenos++;
+                        System.out.println("Santa: Bien! Ya tenemos " + ((Santa) myAgent).numeroRenos);
                         if (((Santa) myAgent).numeroRenos == 8) {
                             step = 3;
                         }

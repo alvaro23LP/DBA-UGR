@@ -21,6 +21,7 @@ public class Msg_Agente_Elfo extends Behaviour {
                     ((Agente) myAgent).mensajeParaTraducirParaSanta = ((Agente) myAgent).transformarAMensajeGenZ("Santa quiero ofrecerme voluntario para la misión");
                     msg.setContent(((Agente) myAgent).mensajeParaTraducirParaSanta);
                     myAgent.send(msg);
+                    //System.out.println(msg);
                     
                     step = 1;
                 }
@@ -42,6 +43,36 @@ public class Msg_Agente_Elfo extends Behaviour {
                         myAgent.doDelete();
                     }
                 }
+                // Enviar mensaje al elfo para que lo traduzca (informar de que se ha encontrado reno)
+                case 2 -> {
+                    ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
+                    msg.addReceiver(new AID("Elfo", AID.ISLOCALNAME));
+                    msg.setConversationId(CONVERTAION_IDS.Canal_Agente_Elfo.name());
+                    ((Agente) myAgent).mensajeParaTraducirParaSanta = ((Agente) myAgent).transformarAMensajeGenZ("Santa, he encontrado un reno en " + ((Agente) myAgent).filaMeta + "," + ((Agente) myAgent).columnaMeta);
+                    msg.setContent(((Agente) myAgent).mensajeParaTraducirParaSanta);
+                    myAgent.send(msg);
+                    
+                    step = 3;
+                }
+                // Recibir mensaje del elfo traducido y almacenarlo. Cambiar de conversación a Santa
+                case 3 -> {
+                    ACLMessage msg = myAgent.blockingReceive();
+                    System.out.println(msg);
+                    if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Elfo.name()) && msg.getPerformative() == ACLMessage.INFORM){
+                        
+                        ((Agente) myAgent).mensajeTraducidoParaSanta = msg.getContent();
+                        
+                        step = 2;
+                        
+                        ((Agente) myAgent).conversandoConElfo = false;
+                        ((Agente) myAgent).conversandoConSanta = true;
+
+                    } else {
+                        System.out.println("Error en el protocolo de comunicación - paso 3");
+                        myAgent.doDelete();
+                    }
+                }
+
             }
         }
     }

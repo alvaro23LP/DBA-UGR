@@ -27,7 +27,7 @@ public class P3 {
         mapa.readMap(ruta);
 
         //entorno = new Entorno(mapa,9,9,0,0);
-        entorno.imprimirMapaConsola();
+        //entorno.imprimirMapaConsola();
 
         ////////// INTERFAZ GRAFICA ////////////
         JFrame frame = new JFrame("Practica 3 - Comunicación de agentes");
@@ -48,10 +48,10 @@ public class P3 {
         String host = "localhost";
         String containerName = "container-P3";
 
-        String agentName = "agente";
-        String santaName = "santa";
-        String rudolphName = "rudolph";
-        String elfName = "elfo";
+        String agentName = "Agente";
+        String santaName = "Santa";
+        String rudolphName = "Rudolph";
+        String elfName = "Elfo";
 
         try {
             jade.core.Runtime rt = jade.core.Runtime.instance();

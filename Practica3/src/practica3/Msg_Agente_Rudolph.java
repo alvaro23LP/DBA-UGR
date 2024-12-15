@@ -63,10 +63,15 @@ public class Msg_Agente_Rudolph extends Behaviour {
                             int columnaReno = Integer.parseInt(msg.getContent().split(":")[1].split(",")[1]);
                             ((Agente) myAgent).entorno.filaMeta = ((Agente) myAgent).filaMeta =  filaReno;
                             ((Agente) myAgent).entorno.columnaMeta = ((Agente) myAgent).columnaMeta = columnaReno;
+                            ((Agente) myAgent).mapaPanel.actualizarDestinoUI(filaReno, columnaReno, 0);
                             msgAnterior = msg;
                             step = 2;
+                            ((Agente) myAgent).conversandoConRudolph = false;
                         } else {
                             step = 4;
+                            ((Agente) myAgent).buscandoRenos = false;
+                            ((Agente) myAgent).conversandoConRudolph = false;
+                            ((Agente) myAgent).conversandoConElfo = true;
                         }
 
                     } else {

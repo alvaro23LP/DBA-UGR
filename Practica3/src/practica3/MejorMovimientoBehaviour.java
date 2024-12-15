@@ -36,6 +36,9 @@ public class MejorMovimientoBehaviour extends Behaviour{
     
     @Override
     public void action() {
+        if (!agente.buscandoRenos && !agente.buscandoSanta) {
+            return;
+        }
         mejorDistancia = Double.MAX_VALUE;
 
         //Limpiamos la percepciones si tenia
@@ -314,6 +317,6 @@ public class MejorMovimientoBehaviour extends Behaviour{
     
     @Override
     public boolean done() {
-        return (agente.filaAgente == agente.filaMeta && agente.columnaAgente == agente.columnaMeta);
+        return (agente.filaAgente == agente.filaMeta && agente.columnaAgente == agente.columnaMeta && agente.buscandoSanta);
     }
 }

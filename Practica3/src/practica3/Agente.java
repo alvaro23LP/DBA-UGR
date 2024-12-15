@@ -26,9 +26,11 @@ public class Agente extends Agent{
 
     public String codigoCanalRudolph;
     public boolean buscandoRenos;
+    public boolean buscandoSanta;
     public boolean conversandoConRudolph, conversandoConSanta, conversandoConElfo;
     public boolean finBusqueda;
     public String mensajeTraducidoParaSanta, mensajeParaTraducirParaSanta;
+    public int numeroRenos;
    
     protected void setup() {
         caminoRecorrido = new ArrayList<>();
@@ -36,6 +38,7 @@ public class Agente extends Agent{
         actualizarVistaAlrededor = new ArrayList<>();
         pos_inicial = new ArrayList<>();
         buscandoRenos = false;
+        buscandoSanta = false;
         finBusqueda = false;
         conversandoConRudolph = false;
         conversandoConSanta = false;
@@ -43,6 +46,7 @@ public class Agente extends Agent{
         mensajeTraducidoParaSanta = "";
         mensajeParaTraducirParaSanta = "";
         codigoCanalRudolph = "";
+        numeroRenos = 0;
 
         // Obtener los argumentos
         Object[] args = getArguments();
