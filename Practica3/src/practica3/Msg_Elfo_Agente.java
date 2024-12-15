@@ -7,15 +7,15 @@ import jade.lang.acl.ACLMessage;
 public class Msg_Elfo_Agente extends Behaviour {
     int step = 0;
     boolean finish = false;
-    String  CONVERSATION_ID = "Canal_Agente-Elfo";
 
     @Override
     public void action() {
         switch (step){ 
+            // Enviar mensaje al agente traducido a boomer (para que Santa lo entienda)
             case 0 -> {
                 ACLMessage msg = myAgent.blockingReceive();
-                System.out.println(msg);
-                if (msg.getConversationId().equals(CONVERSATION_ID) && msg.getPerformative() == ACLMessage.REQUEST){
+                if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Elfo.name()) && msg.getPerformative() == ACLMessage.REQUEST && msg.getSender().toString().equals("Agente")){
+                    System.out.println(msg);
                     ACLMessage reply = msg.createReply(ACLMessage.INFORM);
                     reply.setContent(((Elfo) myAgent).traducirABoomer(msg.getContent()));
                     myAgent.send(reply);

@@ -20,7 +20,11 @@ public class Elfo extends Agent {
         return "Joulupukki " + mensajeLimpio + " Kiitos";
     }
 
-    public String transformarAMensajeGenZ (String  mensaje) {
+    public String traducirAGenZ (String  mensaje) {
+        String primeraParteAEliminar = "Hyvää joulua, ";
+        String segundaParteAEliminar = ", Nähdään pian!";
+        String mensajeLimpio = mensaje.replace(primeraParteAEliminar, "");
+        mensajeLimpio = mensajeLimpio.replace(segundaParteAEliminar, "");
 
         return "Bro, " + mensaje + ", en plan...";
     }

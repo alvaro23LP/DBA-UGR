@@ -7,6 +7,8 @@ public class Santa extends Agent {
     public int filSanta;
     public int colSanta;
     public String codigoCanal;
+    public boolean conversandoConAgente, conversandoConElfo;
+    public String mensajeTraducidoParaAgente, mensajeParaTraducirParaAgente;
 
     
     @Override
@@ -14,10 +16,19 @@ public class Santa extends Agent {
         numeroRenos = 0;
         filSanta = 10;
         colSanta = 10;
+        conversandoConAgente = true;
+        conversandoConElfo = false;
         codigoCanal = "CanalSecreto-53246";
+        mensajeTraducidoParaAgente = "";
+        mensajeParaTraducirParaAgente = "";
+        
         
         addBehaviour(new Msg_Santa_Agente());
         addBehaviour(new Msg_Santa_Elfo());
+    }
+
+    public String transformarAMensajeBoomer (String  mensaje) {
+        return "Hyvää joulua, " + mensaje + ", Nähdään pian!";
     }
     
   

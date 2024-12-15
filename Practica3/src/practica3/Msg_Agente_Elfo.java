@@ -7,30 +7,42 @@ import jade.lang.acl.ACLMessage;
 public class Msg_Agente_Elfo extends Behaviour {
     int step = 0;
     boolean finish = false;
-    String  CONVERSATION_ID = "Canal_Agente-Elfo";
 
     @Override
     public void action() {
-        switch (step){
-            case 0 -> {
-                ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
-                msg.addReceiver(new AID("Elfo", AID.ISLOCALNAME));
-                msg.setConversationId(CONVERSATION_ID);
-                msg.setContent(((Agente) myAgent).transformarAMensajeGenZ("Santa quiero ofrecerme voluntario para la misión"));
-                myAgent.send(msg);
-                
-                step = 1;
-            }
-            // case 1 -> {
-            //     ACLMessage msg = myAgent.blockingReceive();
-            //     System.out.println(msg);
-            //     if (msg.getConversationId().equals(CONVERSATION_ID) && msg.getPerformative() == ACLMessage.INFORM){
-            //         ACLMessage msgASanta = new ACLMessage(ACLMessage.PROPOSE);
-            //         msgASanta.addReceiver(new AID("Santa", AID.ISLOCALNAME));
-            //         msgASanta.setConversationId();
+        if (((Agente) myAgent).conversandoConElfo){
+            
+            switch (step){
+                // Enviar mensaje al elfo para que lo traduzca (ofrecerse para la misión)
+                case 0 -> {
+                    ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
+                    msg.addReceiver(new AID("Elfo", AID.ISLOCALNAME));
+                    msg.setConversationId(CONVERTAION_IDS.Canal_Agente_Elfo.name());
+                    ((Agente) myAgent).mensajeParaTraducirParaSanta = ((Agente) myAgent).transformarAMensajeGenZ("Santa quiero ofrecerme voluntario para la misión");
+                    msg.setContent(((Agente) myAgent).mensajeParaTraducirParaSanta);
+                    myAgent.send(msg);
+                    
+                    step = 1;
+                }
+                // Recibir mensaje del elfo traducido y almacenarlo. Cambiar de conversación a Santa
+                case 1 -> {
+                    ACLMessage msg = myAgent.blockingReceive();
+                    System.out.println(msg);
+                    if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Elfo.name()) && msg.getPerformative() == ACLMessage.INFORM){
+                        
+                        ((Agente) myAgent).mensajeTraducidoParaSanta = msg.getContent();
+                        
+                        step = 2;
+                        
+                        ((Agente) myAgent).conversandoConElfo = false;
+                        ((Agente) myAgent).conversandoConSanta = true;
 
-            //     }
-            // }
+                    } else {
+                        System.out.println("Error en el protocolo de comunicación - paso 1");
+                        myAgent.doDelete();
+                    }
+                }
+            }
         }
     }
 

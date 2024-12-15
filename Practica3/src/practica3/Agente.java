@@ -25,14 +25,23 @@ public class Agente extends Agent{
     public int rodear2D = 0;
 
     public String codigoCanalRudolph;
+    public boolean buscandoRenos;
+    public boolean conversandoConRudolph, conversandoConSanta, conversandoConElfo;
     public boolean finBusqueda;
+    public String mensajeTraducidoParaSanta, mensajeParaTraducirParaSanta;
    
     protected void setup() {
         caminoRecorrido = new ArrayList<>();
         noVolverAPasar = new ArrayList<>();
         actualizarVistaAlrededor = new ArrayList<>();
         pos_inicial = new ArrayList<>();
+        buscandoRenos = false;
         finBusqueda = false;
+        conversandoConRudolph = false;
+        conversandoConSanta = false;
+        conversandoConElfo = true;
+        mensajeTraducidoParaSanta = "";
+        mensajeParaTraducirParaSanta = "";
         codigoCanalRudolph = "";
 
         // Obtener los argumentos
@@ -57,9 +66,9 @@ public class Agente extends Agent{
         // Comportamiento
         addBehaviour(new MejorMovimientoBehaviour(entorno, this));
         addBehaviour(new MovimientoBehaviour(entorno, this));
+        addBehaviour(new Msg_Agente_Elfo());
         addBehaviour(new Msg_Agente_Santa());
         addBehaviour(new Msg_Agente_Rudolph());
-        addBehaviour(new Msg_Agente_Elfo());
     }
 
     public String transformarAMensajeGenZ (String  mensaje) {

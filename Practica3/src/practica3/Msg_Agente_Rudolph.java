@@ -5,14 +5,16 @@ import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 
 public class Msg_Agente_Rudolph extends Behaviour {
+    int step = 0;
+    boolean finish = false;
 
     @Override
     public void action() {
-        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public boolean done() {
-        return false;
+        return finish;
     }
 }
