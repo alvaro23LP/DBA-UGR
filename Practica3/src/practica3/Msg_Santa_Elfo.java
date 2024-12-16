@@ -17,7 +17,7 @@ public class Msg_Santa_Elfo extends Behaviour {
                     ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
                     msg.addReceiver(new AID("Elfo", AID.ISLOCALNAME));
                     msg.setConversationId(CONVERTAION_IDS.Canal_Santa_Elfo.name());
-                    msg.setContent(((Santa) myAgent).mensajeParaTraducirParaAgente);
+                    msg.setContent(((Santa) myAgent).mensajeParaTraducirParaAgente+"$1"); // El 1 indica que el elfo debe cambiar de canal
                     myAgent.send(msg);
 
                     step = 1;
@@ -30,7 +30,7 @@ public class Msg_Santa_Elfo extends Behaviour {
                         
                         ((Santa) myAgent).mensajeTraducidoParaAgente = msg.getContent();
                         
-                        step = 2;
+                        step = 0;
                         
                         ((Santa) myAgent).conversandoConElfo = false;
                         ((Santa) myAgent).conversandoConAgente = true;
@@ -40,6 +40,7 @@ public class Msg_Santa_Elfo extends Behaviour {
                         myAgent.doDelete();
                     }
                 }
+                
             }
         }
             

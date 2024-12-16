@@ -4,9 +4,12 @@ import jade.core.Agent;
 
 
 public class Elfo extends Agent {
+    boolean conversandoConSanta, conversandoConAgente;
     
     @Override
     protected void setup() {
+        conversandoConSanta = false;
+        conversandoConAgente = true;
         addBehaviour(new Msg_Elfo_Agente());
         addBehaviour(new Msg_Elfo_Santa());        
     }

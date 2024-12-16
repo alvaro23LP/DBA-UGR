@@ -16,6 +16,7 @@ public class Msg_Santa_Agente extends Behaviour {
             switch (step) {
                 // Recibir mensaje del agente que se ofrece voluntario
                 case 0 -> {
+                    System.out.println("**********************");
                     ACLMessage msg = myAgent.blockingReceive();
                     if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Santa.name()) && msg.getPerformative() == ACLMessage.PROPOSE && msg.getSender().getLocalName().equals("Agente")) {
                         System.out.println(msg);
@@ -68,6 +69,32 @@ public class Msg_Santa_Agente extends Behaviour {
                         myAgent.doDelete();
                     }
                 }
+                // Esperar a que el Agente pregunte la localización
+                case 3 -> {
+                    ACLMessage msg = myAgent.blockingReceive();
+                    if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Santa.name()) && msg.getPerformative() == ACLMessage.REQUEST && msg.getSender().getLocalName().equals("Agente")) {
+                        System.out.println(msg);
+                        msgAnterior = msg;
+                        ((Santa) myAgent).mensajeParaTraducirParaAgente = ((Santa) myAgent).transformarAMensajeBoomer("Traeme mis renos chico, estoy en esta localización:" + ((Santa) myAgent).filSanta + "," + ((Santa) myAgent).colSanta) + ":";
+                        
+                        step = 4;
+                        ((Santa) myAgent).conversandoConAgente = false;
+                        ((Santa) myAgent).conversandoConElfo = true;
+                    } else {
+                        System.out.println("Error en el protocolo de comunicación - paso 3");
+                        myAgent.doDelete();
+                    }
+                }
+                // Reenvio de mensaje traducido al agente con las coordenadas
+                case 4 -> {                    
+                    ACLMessage reply = msgAnterior.createReply(ACLMessage.INFORM);
+                    reply.setContent(((Santa) myAgent).mensajeTraducidoParaAgente);
+                    myAgent.send(reply);
+                    
+                    step = 5;
+                }
+
+
             }
         }
     }

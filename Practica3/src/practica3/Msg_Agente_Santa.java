@@ -50,14 +50,46 @@ public class Msg_Agente_Santa extends Behaviour {
                 }
                 // Envio de mensaje traducido a Santa informando de que se ha encontrado un reno
                 case 2 -> {
-                    ACLMessage msg = msgAnterior.createReply(ACLMessage.INFORM);
+                    if (((Agente) myAgent).buscandoRenos){
+                        ACLMessage msg = msgAnterior.createReply(ACLMessage.INFORM);
+                        msg.setContent(((Agente) myAgent).mensajeTraducidoParaSanta);
+                        myAgent.send(msg);
+
+                        step = 2;
+                        ((Agente) myAgent).conversandoConSanta = false;
+                        ((Agente) myAgent).conversandoConRudolph = true;
+                    } else {
+                        step = 3;
+                    }
+                }
+                // Envio de mensaje traducido a Santa preguntado si le puede dar su localización
+                case 3 -> {                    
+                    ACLMessage msg = msgAnterior.createReply(ACLMessage.REQUEST);
                     msg.setContent(((Agente) myAgent).mensajeTraducidoParaSanta);
                     myAgent.send(msg);
 
-                    step = 2;
-                    ((Agente) myAgent).conversandoConSanta = false;
-                    ((Agente) myAgent).conversandoConRudolph = true;
+                    step = 4;                    
                 }
+                // Recepción de coordenadas de Santa y movimiento hacia su posición
+                case 4 -> {
+                    ACLMessage msg = myAgent.blockingReceive();
+                    System.out.println(msg);
+                    if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Santa.name()) && msg.getPerformative() == ACLMessage.INFORM){
+                        System.out.println("Santa ha enviado su localización");
+                        msgAnterior = msg;
+                        ((Agente) myAgent).entorno.filaMeta = ((Agente) myAgent).filaMeta = Integer.parseInt(msg.getContent().split(":")[1].split(",")[0]);
+                        ((Agente) myAgent).entorno.columnaMeta = ((Agente) myAgent).columnaMeta = Integer.parseInt(msg.getContent().split(":")[1].split(",")[1]);
+                        ((Agente) myAgent).mapaPanel.actualizarDestinoUI(((Agente) myAgent).filaMeta, ((Agente) myAgent).columnaMeta, 0);
+                        step = 5;
+                        ((Agente) myAgent).conversandoConElfo= false;
+                        ((Agente) myAgent).conversandoConRudolph = true;
+                        
+                    } else {
+                        System.out.println("Error en el protocolo de comunicación - paso 4");
+                        myAgent.doDelete();
+                    }
+                }
+
             }
         }
     }

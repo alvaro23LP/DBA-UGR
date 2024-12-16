@@ -82,6 +82,7 @@ public class Agente extends Agent{
     public void moverAgente(int nuevaFila, int nuevaColumna) {
         this.filaAgente = nuevaFila;
         this.columnaAgente = nuevaColumna;
+        System.out.println("Agente se mueve a: (" + nuevaFila + "," + nuevaColumna + ")");
         mapaPanel.actualizarPosicionAgente(nuevaFila, nuevaColumna);
     }
 
