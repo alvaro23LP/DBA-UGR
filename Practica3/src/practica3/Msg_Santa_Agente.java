@@ -101,6 +101,7 @@ public class Msg_Santa_Agente extends Behaviour {
                         ACLMessage reply = msg.createReply(ACLMessage.INFORM);
                         reply.setContent("HoHoHo!");
                         myAgent.send(reply);
+                        step = 6;
                         finish = true;
                     } else {
                         System.out.println("Error en el protocolo de comunicación - paso 5");

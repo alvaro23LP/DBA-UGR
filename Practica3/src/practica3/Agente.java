@@ -91,7 +91,9 @@ public class Agente extends Agent{
 
     // Funcion final
     public void takeDown() {
-        System.out.println(" ¡¡FIN!!  El agente ha llegado al objetivo en " + contadorDePasos + " pasos");
+        if (buscandoSanta){
+            System.out.println(" ¡¡FIN!!  El agente ha llegado al objetivo en " + contadorDePasos + " pasos");
+        }
         System.out.println("Agente finalizado");
         // System.out.print("Camino recorrido: ");
         // for (ArrayList<Integer> posicion : caminoRecorrido) {

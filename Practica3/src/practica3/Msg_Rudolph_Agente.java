@@ -45,6 +45,8 @@ public class Msg_Rudolph_Agente extends Behaviour {
                         contadorRenos++;
                     } else {
                         reply.setContent("Ya has encontrado a todos los renos, debes hablar con Santa!");
+                        step = 2;
+                        finish = true;
                     }
                     
                     myAgent.send(reply);

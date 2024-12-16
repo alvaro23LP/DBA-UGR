@@ -106,6 +106,7 @@ public class Msg_Agente_Santa extends Behaviour {
                     System.out.println(msg);
                     if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Santa.name()) && msg.getPerformative() == ACLMessage.INFORM){
                         System.out.println("SE HA COMPLETADO LA MISIÓN");
+                        step = 7;
                         finish = true;
                     } else {
                         System.out.println("Error en el protocolo de comunicación - paso 6");

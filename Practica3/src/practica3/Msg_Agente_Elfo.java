@@ -124,7 +124,8 @@ public class Msg_Agente_Elfo extends Behaviour {
                     if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Elfo.name()) && msg.getPerformative() == ACLMessage.INFORM){
                         
                         ((Agente) myAgent).mensajeTraducidoParaSanta = msg.getContent();                        
-                        step = 8;                         
+                        step = 8;
+                        finish = true;                  
                         ((Agente) myAgent).conversandoConElfo = false;
                         ((Agente) myAgent).conversandoConSanta = true;
 

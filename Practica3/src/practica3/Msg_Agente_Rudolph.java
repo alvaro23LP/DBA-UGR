@@ -71,6 +71,7 @@ public class Msg_Agente_Rudolph extends Behaviour {
                             ((Agente) myAgent).conversandoConRudolph = false;
                         } else {
                             step = 4;
+                            finish = true;
                             ((Agente) myAgent).buscandoRenos = false;
                             ((Agente) myAgent).conversandoConRudolph = false;
                             ((Agente) myAgent).conversandoConElfo = true;
