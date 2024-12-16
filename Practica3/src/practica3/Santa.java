@@ -14,8 +14,8 @@ public class Santa extends Agent {
     @Override
     protected void setup() {
         numeroRenos = 0;
-        filSanta = 10;
-        colSanta = 10;
+        filSanta = P3.coordenadasSanta[0][0];
+        colSanta = P3.coordenadasSanta[0][1];
         conversandoConAgente = true;
         conversandoConElfo = false;
         codigoCanal = "CanalSecreto-53246";

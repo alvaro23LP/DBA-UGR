@@ -15,7 +15,9 @@ import practica3.GUI.MapaPanel;
 
 public class P3 {
 
-    public static int[][] coordenadasRenos2 = new int[8][2]; // Declaración de la matriz
+    public static int[][] coordenadasRenos2 = new int[8][2];
+    public static int[][] coordenadasAgente = new int[1][2];
+    public static int[][] coordenadasSanta = new int[1][2];
 
     public static void main(String[] args) {
 
@@ -28,7 +30,7 @@ public class P3 {
         //////////////// ENTORNO /////////////////
         mapa = new Mapa();
         String ruta = "./mapas/100x100-sinObstaculos.txt";
-        entorno = new Entorno(mapa, 0, 0, -1, -1); // al principio las coordenadas de destino no se conocen
+        entorno = new Entorno(mapa, coordenadasAgente[0][1], coordenadasAgente[0][0], -1, -1); // al principio las coordenadas de destino no se conocen
 
         mapa.readMap(ruta);
 
@@ -92,12 +94,12 @@ public class P3 {
  * Muestra una ventana modal para ingresar las coordenadas de los renos.
  */
 private static void mostrarVentanaCoordenadas() {
-    JDialog dialog = new JDialog((Frame) null, "Ingresar Coordenadas de Renos", true);
-    dialog.setLayout(new GridLayout(10, 1));
+    JDialog dialog = new JDialog((Frame) null, "Ingresar Coordenadas", true);
+    dialog.setLayout(new GridLayout(11, 1));
 
     // Panel para ingresar coordenadas
-    JPanel[] paneles = new JPanel[8];
-    JTextField[][] campos = new JTextField[8][2];
+    JPanel[] paneles = new JPanel[10];
+    JTextField[][] campos = new JTextField[10][2];
 
     for (int i = 0; i < 8; i++) {
         paneles[i] = new JPanel(new FlowLayout());
@@ -116,6 +118,40 @@ private static void mostrarVentanaCoordenadas() {
         dialog.add(paneles[i]);
     }
 
+        //Coordenadas agente
+        paneles[8] = new JPanel(new FlowLayout());
+        JLabel label = new JLabel("Agente:");
+        JTextField xField = new JTextField(5);
+        JTextField yField = new JTextField(5);
+        campos[8][0] = xField;
+        campos[8][1] = yField;
+
+        paneles[8].add(label);
+        paneles[8].add(new JLabel("X: "));
+        paneles[8].add(xField);
+        paneles[8].add(new JLabel("Y: "));
+        paneles[8].add(yField);
+
+        dialog.add(paneles[8]);
+
+        //Coordnadas Santa
+        paneles[9] = new JPanel(new FlowLayout());
+        JLabel label2 = new JLabel("Santa:");
+        JTextField xField2 = new JTextField(5);
+        JTextField yField2 = new JTextField(5);
+        campos[9][0] = xField2;
+        campos[9][1] = yField2;
+
+        paneles[9].add(label2);
+        paneles[9].add(new JLabel("X: "));
+        paneles[9].add(xField2);
+        paneles[9].add(new JLabel("Y: "));
+        paneles[9].add(yField2);
+
+        dialog.add(paneles[9]);
+
+
+
     // Botón para guardar coordenadas
     JButton guardarButton = new JButton("Guardar Coordenadas");
     guardarButton.addActionListener(new ActionListener() {
@@ -126,9 +162,19 @@ private static void mostrarVentanaCoordenadas() {
                     int x = Integer.parseInt(campos[i][0].getText());
                     int y = Integer.parseInt(campos[i][1].getText());
 
-                    coordenadasRenos2[i][0] = x;
-                    coordenadasRenos2[i][1] = y;
+                    coordenadasRenos2[i][0] = y;
+                    coordenadasRenos2[i][1] = x;
                 }
+
+                int x = Integer.parseInt(campos[8][0].getText());
+                int y = Integer.parseInt(campos[8][1].getText());
+                coordenadasAgente[0][0] = x;
+                coordenadasAgente[0][1] = y;
+
+                x = Integer.parseInt(campos[9][0].getText());
+                y = Integer.parseInt(campos[9][1].getText());
+                coordenadasSanta[0][0] = y;
+                coordenadasSanta[0][1] = x;
 
                 JOptionPane.showMessageDialog(dialog, "Coordenadas guardadas correctamente.");
                 dialog.dispose();
