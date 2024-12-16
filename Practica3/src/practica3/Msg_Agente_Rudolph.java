@@ -30,7 +30,7 @@ public class Msg_Agente_Rudolph extends Behaviour {
                     System.out.println(msg);
                     if (msg.getConversationId().equals(((Agente) myAgent).codigoCanalRudolph) && msg.getPerformative() == ACLMessage.AGREE){
                         System.out.println("Rudolph aceptó la propuesta");
-                        ((Agente) myAgent).buscandoRenos = true;
+                        //((Agente) myAgent).buscandoRenos = true;
                         msgAnterior = msg;
                         step = 2;                      
 
@@ -64,6 +64,7 @@ public class Msg_Agente_Rudolph extends Behaviour {
                             ((Agente) myAgent).entorno.filaMeta = ((Agente) myAgent).filaMeta =  filaReno;
                             ((Agente) myAgent).entorno.columnaMeta = ((Agente) myAgent).columnaMeta = columnaReno;
                             ((Agente) myAgent).mapaPanel.actualizarDestinoUI(filaReno, columnaReno, 0);
+                            ((Agente) myAgent).buscandoRenos = true;
                             msgAnterior = msg;
                             step = 2;
                             ((Agente) myAgent).conversandoConRudolph = false;

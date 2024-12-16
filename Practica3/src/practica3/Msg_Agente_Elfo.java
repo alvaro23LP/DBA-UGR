@@ -105,6 +105,34 @@ public class Msg_Agente_Elfo extends Behaviour {
                         myAgent.doDelete();
                     }
                 }
+                // Enviar mensaje al elfo para que lo traduzca (informar a Santa que hemos llegado)
+                case 6 -> {
+                    ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
+                    msg.addReceiver(new AID("Elfo", AID.ISLOCALNAME));
+                    msg.setConversationId(CONVERTAION_IDS.Canal_Agente_Elfo.name());
+                    ((Agente) myAgent).mensajeParaTraducirParaSanta = ((Agente) myAgent).transformarAMensajeGenZ("Santa estoy aquí, tengo a todos los renos!");
+                    msg.setContent(((Agente) myAgent).mensajeParaTraducirParaSanta+"$1");
+                    myAgent.send(msg);
+                    //System.out.println(msg);
+                    
+                    step = 7;
+                }
+                // Recibir mensaje del elfo traducido y almacenarlo. Cambiar de conversación a Santa
+                case 7 -> {
+                    ACLMessage msg = myAgent.blockingReceive();
+                    System.out.println(msg);
+                    if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Elfo.name()) && msg.getPerformative() == ACLMessage.INFORM){
+                        
+                        ((Agente) myAgent).mensajeTraducidoParaSanta = msg.getContent();                        
+                        step = 8;                         
+                        ((Agente) myAgent).conversandoConElfo = false;
+                        ((Agente) myAgent).conversandoConSanta = true;
+
+                    } else {
+                        System.out.println("Error en el protocolo de comunicación - paso 7");
+                        myAgent.doDelete();
+                    }
+                }
 
             }
         }

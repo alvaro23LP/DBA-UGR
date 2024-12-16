@@ -58,6 +58,7 @@ public class Msg_Agente_Santa extends Behaviour {
                         step = 2;
                         ((Agente) myAgent).conversandoConSanta = false;
                         ((Agente) myAgent).conversandoConRudolph = true;
+                        ((Agente) myAgent).buscandoRenos = false;
                     } else {
                         step = 3;
                     }
@@ -79,13 +80,33 @@ public class Msg_Agente_Santa extends Behaviour {
                         msgAnterior = msg;
                         ((Agente) myAgent).entorno.filaMeta = ((Agente) myAgent).filaMeta = Integer.parseInt(msg.getContent().split(":")[1].split(",")[0]);
                         ((Agente) myAgent).entorno.columnaMeta = ((Agente) myAgent).columnaMeta = Integer.parseInt(msg.getContent().split(":")[1].split(",")[1]);
-                        ((Agente) myAgent).mapaPanel.actualizarDestinoUI(((Agente) myAgent).filaMeta, ((Agente) myAgent).columnaMeta, 0);
+                        ((Agente) myAgent).mapaPanel.actualizarDestinoUI(((Agente) myAgent).filaMeta, ((Agente) myAgent).columnaMeta, 1);
                         step = 5;
-                        ((Agente) myAgent).conversandoConElfo= false;
-                        ((Agente) myAgent).conversandoConRudolph = true;
+                        ((Agente) myAgent).conversandoConSanta= false;
+                        ((Agente) myAgent).buscandoSanta = true;   
                         
                     } else {
                         System.out.println("Error en el protocolo de comunicación - paso 4");
+                        myAgent.doDelete();
+                    }
+                }
+                // Envio de mensaje traducido a Santa diceindo que se ha llegado a su posición
+                case 5 -> {
+                    ACLMessage msg = msgAnterior.createReply(ACLMessage.INFORM);
+                    msg.setContent(((Agente) myAgent).mensajeTraducidoParaSanta);
+                    myAgent.send(msg);
+
+                    step = 6;
+                }
+                // Recepción del mensaje de Santa agradeciendo la ayuda (HOHOHO)
+                case 6 -> {
+                    ACLMessage msg = myAgent.blockingReceive();
+                    System.out.println(msg);
+                    if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Santa.name()) && msg.getPerformative() == ACLMessage.INFORM){
+                        System.out.println("SE HA COMPLETADO LA MISIÓN");
+                        finish = true;
+                    } else {
+                        System.out.println("Error en el protocolo de comunicación - paso 6");
                         myAgent.doDelete();
                     }
                 }

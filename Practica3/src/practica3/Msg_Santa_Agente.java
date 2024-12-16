@@ -93,6 +93,20 @@ public class Msg_Santa_Agente extends Behaviour {
                     
                     step = 5;
                 }
+                // Respuesta y envío del mensaje final (HoHoHo!)
+                case 5 -> {
+                    ACLMessage msg = myAgent.blockingReceive();
+                    if (msg.getConversationId().equals(CONVERTAION_IDS.Canal_Agente_Santa.name()) && msg.getPerformative() == ACLMessage.INFORM && msg.getSender().getLocalName().equals("Agente")) {
+                        System.out.println(msg);
+                        ACLMessage reply = msg.createReply(ACLMessage.INFORM);
+                        reply.setContent("HoHoHo!");
+                        myAgent.send(reply);
+                        finish = true;
+                    } else {
+                        System.out.println("Error en el protocolo de comunicación - paso 5");
+                        myAgent.doDelete();
+                    }
+                }
 
 
             }
@@ -101,6 +115,6 @@ public class Msg_Santa_Agente extends Behaviour {
 
     @Override
     public boolean done() {
-        return false;
+        return finish;
     }
 }

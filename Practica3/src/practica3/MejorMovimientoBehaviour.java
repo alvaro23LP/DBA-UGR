@@ -129,7 +129,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
        }
        
        try {
-           Thread.sleep(50);
+           Thread.sleep(500);
        } catch (InterruptedException e) {
            System.out.print(e);
        }

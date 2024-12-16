@@ -37,9 +37,9 @@ public class MovimientoBehaviour extends Behaviour {
     public boolean done() {
         if (agente.filaAgente == agente.filaMeta && agente.columnaAgente == agente.columnaMeta) {
             agente.conversandoConElfo = true;
-            System.out.println("Agente: He llegado a la meta********");
+            //agente.buscandoRenos = false;
+            agente.caminoRecorrido.clear();
             if (agente.buscandoSanta){
-                //agente.doDelete();
                 return true;
             }else{
                 return false;
