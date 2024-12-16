@@ -8,22 +8,10 @@ public class Rudolph extends Agent {
 
     @Override
     protected void setup() {
-        coordenadasRenos[0][0] = 5;
-        coordenadasRenos[0][1] = 2;
-        coordenadasRenos[1][0] = 11;
-        coordenadasRenos[1][1] = 12;
-        coordenadasRenos[2][0] = 8;
-        coordenadasRenos[2][1] = 1;
-        coordenadasRenos[3][0] = 20;
-        coordenadasRenos[3][1] = 5;
-        coordenadasRenos[4][0] = 23;
-        coordenadasRenos[4][1] = 18;
-        coordenadasRenos[5][0] = 27;
-        coordenadasRenos[5][1] = 15;
-        coordenadasRenos[6][0] = 3;
-        coordenadasRenos[6][1] = 26;
-        coordenadasRenos[7][0] = 9;
-        coordenadasRenos[7][1] = 0;
+        for (int i = 0; i< 8; i++){
+            coordenadasRenos[i][0] = P3.coordenadasRenos2[i][0];
+            coordenadasRenos[i][1] = P3.coordenadasRenos2[i][1];
+        }
 
         codigoCanal = "CanalSecreto-53246";
 
