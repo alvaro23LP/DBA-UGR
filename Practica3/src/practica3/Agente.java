@@ -14,6 +14,7 @@ public class Agente extends Agent{
 
     Entorno entorno;
     int filaAgente, columnaAgente, filaMeta, columnaMeta;
+    int filMovimiento, colMovimiento;
 
     public ArrayList<ArrayList<Integer>> caminoRecorrido;
     public ArrayList<ArrayList<Integer>> noVolverAPasar;
@@ -31,6 +32,7 @@ public class Agente extends Agent{
     public boolean finBusqueda;
     public String mensajeTraducidoParaSanta, mensajeParaTraducirParaSanta;
     public int numeroRenos;
+    public boolean stopMovimiento = false;
    
     protected void setup() {
         caminoRecorrido = new ArrayList<>();
@@ -68,11 +70,11 @@ public class Agente extends Agent{
         this.columnaMeta = entorno.columnaMeta;
         
         // Comportamiento
-        addBehaviour(new MejorMovimientoBehaviour(entorno, this));
-        addBehaviour(new MovimientoBehaviour(entorno, this));
         addBehaviour(new Msg_Agente_Elfo());
         addBehaviour(new Msg_Agente_Santa());
         addBehaviour(new Msg_Agente_Rudolph());
+        addBehaviour(new MejorMovimientoBehaviour(entorno, this));
+        addBehaviour(new MovimientoBehaviour(entorno, this));
     }
 
     public String transformarAMensajeGenZ (String  mensaje) {

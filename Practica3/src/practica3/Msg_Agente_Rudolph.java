@@ -65,6 +65,7 @@ public class Msg_Agente_Rudolph extends Behaviour {
                             ((Agente) myAgent).entorno.columnaMeta = ((Agente) myAgent).columnaMeta = columnaReno;
                             ((Agente) myAgent).mapaPanel.actualizarDestinoUI(filaReno, columnaReno, 0);
                             ((Agente) myAgent).buscandoRenos = true;
+                            ((Agente) myAgent).stopMovimiento = false;
                             msgAnterior = msg;
                             step = 2;
                             ((Agente) myAgent).conversandoConRudolph = false;

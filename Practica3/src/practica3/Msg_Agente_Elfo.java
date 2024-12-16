@@ -50,7 +50,7 @@ public class Msg_Agente_Elfo extends Behaviour {
                         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
                         msg.addReceiver(new AID("Elfo", AID.ISLOCALNAME));
                         msg.setConversationId(CONVERTAION_IDS.Canal_Agente_Elfo.name());
-                        ((Agente) myAgent).mensajeParaTraducirParaSanta = ((Agente) myAgent).transformarAMensajeGenZ("Santa, he encontrado un reno en " + ((Agente) myAgent).filaMeta + "," + ((Agente) myAgent).columnaMeta);
+                        ((Agente) myAgent).mensajeParaTraducirParaSanta = ((Agente) myAgent).transformarAMensajeGenZ("Santa, he encontrado un reno! ");
                         msg.setContent(((Agente) myAgent).mensajeParaTraducirParaSanta+"$0");
                         myAgent.send(msg);
                         

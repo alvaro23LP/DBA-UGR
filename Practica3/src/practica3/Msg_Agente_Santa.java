@@ -56,9 +56,10 @@ public class Msg_Agente_Santa extends Behaviour {
                         myAgent.send(msg);
 
                         step = 2;
+                        System.out.println("Desactivandoooooooooooooooooooooooooooooooooooooooooo -- Cambia a RUDOLPH");
                         ((Agente) myAgent).conversandoConSanta = false;
                         ((Agente) myAgent).conversandoConRudolph = true;
-                        ((Agente) myAgent).buscandoRenos = false;
+                        //((Agente) myAgent).buscandoRenos = false;
                     } else {
                         step = 3;
                     }
@@ -84,6 +85,7 @@ public class Msg_Agente_Santa extends Behaviour {
                         step = 5;
                         ((Agente) myAgent).conversandoConSanta= false;
                         ((Agente) myAgent).buscandoSanta = true;   
+                        ((Agente) myAgent).stopMovimiento = false;
                         
                     } else {
                         System.out.println("Error en el protocolo de comunicación - paso 4");

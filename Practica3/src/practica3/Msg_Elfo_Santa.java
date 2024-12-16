@@ -1,6 +1,6 @@
 package practica3;
 
-import jade.core.AID;
+//import jade.core.AID;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 
