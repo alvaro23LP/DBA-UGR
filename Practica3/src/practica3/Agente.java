@@ -33,6 +33,7 @@ public class Agente extends Agent{
     public String mensajeTraducidoParaSanta, mensajeParaTraducirParaSanta;
     public int numeroRenos;
     public boolean stopMovimiento = false;
+    public int contadorDePasos = 0;
    
     protected void setup() {
         caminoRecorrido = new ArrayList<>();
@@ -90,7 +91,7 @@ public class Agente extends Agent{
 
     // Funcion final
     public void takeDown() {
-        System.out.println(" ¡¡FIN!!  El agente ha llegado al objetivo en " + (caminoRecorrido.size()-1) + " pasos");
+        System.out.println(" ¡¡FIN!!  El agente ha llegado al objetivo en " + contadorDePasos + " pasos");
         System.out.println("Agente finalizado");
         // System.out.print("Camino recorrido: ");
         // for (ArrayList<Integer> posicion : caminoRecorrido) {

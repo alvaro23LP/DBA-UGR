@@ -49,6 +49,8 @@ public class MovimientoBehaviour extends Behaviour {
         entorno.filaAgente = filaMovimiento;
         entorno.columnaAgente = colMovimiento;
         agente.moverAgente(filaMovimiento, colMovimiento);
+        agente.contadorDePasos++;
+        System.out.println("Movimiento: " + agente.contadorDePasos);
         
         //entorno.imprimirMapaConsola();      
     }
@@ -61,7 +63,7 @@ public class MovimientoBehaviour extends Behaviour {
             agente.stopMovimiento = true;
             agente.caminoRecorrido.clear();
             if (agente.buscandoSanta){
-                System.out.println("ENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNDDDDDDDDDDDDDDD");
+                agente.doDelete();
                 return true;
             }else{
                 return false;
